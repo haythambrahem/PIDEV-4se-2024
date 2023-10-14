@@ -21,7 +21,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_searchid" layoutX="174.0" layoutY="41.0" onKeyTyped="#searchLogement" promptText="identifient" unFocusColor="#4688c9" />
+      <JFXTextField fx:id="txt_searchid" layoutX="174.0" layoutY="41.0" promptText="identifient" unFocusColor="#4688c9" />
       <JFXTextField fx:id="txt_adr" layoutX="24.0" layoutY="84.0" prefHeight="25.0" prefWidth="243.0" promptText="Adresse" unFocusColor="#4688c9" />
       <JFXTextField fx:id="txt_superfice" layoutX="283.0" layoutY="84.0" promptText="Superfice" unFocusColor="#4688c9" />
       <JFXComboBox fx:id="cb_type" layoutX="216.0" layoutY="143.0" prefHeight="25.0" prefWidth="135.0" promptText="type" unFocusColor="#4688c9" />
@@ -49,7 +49,7 @@
             <FontAwesomeIcon glyphName="UPLOAD" />
          </graphic>
       </JFXButton>
-      <JFXButton layoutX="298.0" layoutY="41.0" onMouseClicked="#searchLogement" prefHeight="19.0" prefWidth="0.0">
+      <JFXButton layoutX="298.0" layoutY="41.0" onAction="#searchLogement" prefHeight="19.0" prefWidth="0.0">
          <graphic>
             <FontAwesomeIcon glyphName="SEARCH" />
          </graphic>
@@ -61,6 +61,6 @@
       </Pane>
       <JFXTextField fx:id="txt_region" layoutX="45.0" layoutY="143.0" promptText="Region" unFocusColor="#4688c9" />
       <Button layoutX="39.0" layoutY="373.0" mnemonicParsing="false" text="Button" />
-      <JFXListView fx:id="listView_logement" layoutX="35.0" layoutY="405.0" prefHeight="400.0" prefWidth="787.0" />
+      <JFXListView fx:id="listView_logement" layoutX="35.0" layoutY="405.0" onMouseClicked="#listLogEvn" prefHeight="400.0" prefWidth="787.0" />
    </children>
 </AnchorPane>

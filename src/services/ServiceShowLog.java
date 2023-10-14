@@ -92,10 +92,9 @@ public class ServiceShowLog {
                     String region = result.getString("region");
                     String adrL = result.getString("adrL");
                      int superfice = result.getInt("superfice");
-                    Blob blob = result.getBlob("image");
-                    byte[] byteImg = blob.getBytes(1, (int) blob.length());
+                    String image = result.getString("image");
 
-                    controller.updateUI(loyer, region, adrL, superfice, byteImg);
+                    controller.updateUI(loyer, region, adrL, superfice, image);
                 }
             }
         }
@@ -107,8 +106,6 @@ public class ServiceShowLog {
                  "and idLogement < ?";
     int loyer = 0;
     int superfice;
-    byte byteImg[];
-    Blob blob;
 
     try (PreparedStatement st = con.prepareStatement(sql)) {
         st.setInt(1, position);
@@ -118,9 +115,8 @@ public class ServiceShowLog {
                 String region = result.getString("region");
                 String adrL = result.getString("adrL");
                 superfice = result.getInt("superfice");
-                blob = result.getBlob("image");
-                byteImg = blob.getBytes(1, (int) blob.length());
-                controller.updateUI(loyer, region, adrL, superfice, byteImg);
+                                   String image = result.getString("image");
+                controller.updateUI(loyer, region, adrL, superfice, image);
             }
         }
     } catch (SQLException ex) {

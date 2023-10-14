@@ -20,7 +20,7 @@ public class LogementDetails {
     private int superfice;
     private String region;
     private String adrL;
-private Blob image;
+private String image;
 
     public LogementDetails() {
     }
@@ -28,7 +28,7 @@ private Blob image;
         return loyer;
     }
 
-    public LogementDetails(int loyer, int superfice, String region, String adrL, Blob image) {
+    public LogementDetails(int loyer, int superfice, String region, String adrL, String image) {
         this.loyer = loyer;
         this.superfice = superfice;
         this.region = region;
@@ -36,11 +36,11 @@ private Blob image;
         this.image = image;
     }
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -71,26 +71,26 @@ private Blob image;
     public void setAdrL(String adrL) {
         this.adrL = adrL;
     }
-     public byte[] getImageData() {
-        if (image == null) {
-            return null; // Return null if no image data is present
-        }
-
-        try {
-            // Convert the Blob to a byte array
-            InputStream inputStream = image.getBinaryStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-
-            return outputStream.toByteArray();
-        } catch (SQLException | IOException e) {
-            e.printStackTrace(); // Handle exceptions as needed
-            return null; // Return null in case of an error
-        }
-    }
+//     public byte[] getImageData() {
+//        if (image == null) {
+//            return null; // Return null if no image data is present
+//        }
+//
+//        try {
+//            // Convert the Blob to a byte array
+//            InputStream inputStream = image.getBinaryStream();
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//            byte[] buffer = new byte[4096];
+//            int bytesRead = -1;
+//
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, bytesRead);
+//            }
+//
+//            return outputStream.toByteArray();
+//        } catch (SQLException | IOException e) {
+//            e.printStackTrace(); // Handle exceptions as needed
+//            return null; // Return null in case of an error
+//        }
+//    }
 }

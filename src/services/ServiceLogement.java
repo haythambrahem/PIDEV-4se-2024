@@ -35,10 +35,8 @@ public class ServiceLogement implements LogService<Logement> {
     Statement ste;
     private FileInputStream fs;
 
-    // Constructor to initialize the database connection
- /*   public ServiceLogement(Connection con) {
-        this.con = con;
-    }*/
+
+
 
     public ServiceLogement() {
        con = MyDB.getinstance().getCon();//To change body of generated methods, choose Tools | Templates.
@@ -60,8 +58,7 @@ String type = t.getType().toString();
         ps.setString(5, t.getRegion());
 
         // Assuming that the image data is stored as a Blob
-        Blob imageBlob = t.getImage();
-        ps.setBlob(6, imageBlob);
+        ps.setString(6, t.getImage());
 
         // Execute the query
         ps.executeUpdate();
@@ -98,60 +95,47 @@ String type = t.getType().toString();
         }
     }*/
     
-    
- public List<Logement> rechercheLogement(String adr, int superficie, int loyer, String type, String region) {
-         String selectQuery = "SELECT * FROM logement WHERE " +
-        "adr LIKE ? AND " +
-        "superficie >= ? AND " +
-        "loyer <= ? AND " +
-        "type = ? AND " +
-        "region = ?";
+public List<Logement> rechercheLogement(String critere) {
+    String selectQuery = "SELECT * FROM logement WHERE adrL LIKE ?";
 
     try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
-        preparedStatement.setString(1, "%" + adr + "%"); // Use % for a partial match
-        preparedStatement.setInt(2, superficie);
-        preparedStatement.setInt(3, loyer);
-        preparedStatement.setString(4, type);
-        preparedStatement.setString(5, region);
+        preparedStatement.setString(1, "%" + critere + "%"); // Utilisez % pour une recherche partielle
 
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Logement> logements = new ArrayList<>();
 
         while (resultSet.next()) {
             Logement logement = new Logement();
-            logement.setId(resultSet.getInt("id"));
-            logement.setAdr(resultSet.getString("adr"));
+            logement.setId(resultSet.getInt("idLogement"));
+            logement.setAdr(resultSet.getString("adrL"));
             logement.setSuperfice(resultSet.getInt("superfice"));
             logement.setLoyer(resultSet.getInt("loyer"));
-          //  String typeString = resultSet.getString("type");
-            
-            // Convert the string to the enum value
-         //   String typeString = resultSet.getString("type");
-//logement.setType(String.valueOf(typeString));
-
-            
             logement.setRegion(resultSet.getString("region"));
-            // Handle Blob image data
-            // logement.setImage(resultSet.getBlob("image"));
+            logement.setType(type.valueOf(resultSet.getString("type")));
+            logement.setImage(resultSet.getString("image"));
+            // Autres attributs du logement
 
             logements.add(logement);
+
         }
 
         return logements;
     } catch (SQLException e) {
         e.printStackTrace();
-        // Handle the exception appropriately, e.g., log or throw it
+        // Gérez les exceptions appropriées ici
         return Collections.emptyList();
     }
 }
-    @Override
-    public void modifierLogement(Logement t) {
+
+
+   @Override
+   public void modifierLogement(Logement t) {
           
          try {
-        String sql = "UPDATE logement SET adrL=?, superfice=?, loyer=?, type=?, region=?, image=? WHERE idLogement=" + t.getId();
+        String sql = "UPDATE logement SET adrL=?, superfice=?, loyer=?, type=?, region=?, image=? WHERE idLogement=?" ;
 
         // Use a PreparedStatement to avoid SQL injection
-        PreparedStatement updateStatement;
+        PreparedStatement updateStatement ;
         String type = t.getType().toString();
         updateStatement = con.prepareStatement(sql);
         updateStatement.setString(1, t.getAdr());
@@ -161,8 +145,9 @@ String type = t.getType().toString();
         updateStatement.setString(5, t.getRegion());
 
         // Handle updating Blob image data
-        InputStream imageStream = t.getImage().getBinaryStream();
-        updateStatement.setBinaryStream(6, imageStream, t.getImage().length());
+        
+        updateStatement.setString(6,  t.getImage());
+        updateStatement.setInt(7, t.getId());
 
         // Use a WHERE clause to specify the record to update
         updateStatement.executeUpdate();
@@ -203,8 +188,9 @@ String type = t.getType().toString();
             logement.setSuperfice(resultSet.getInt("superfice"));
             logement.setLoyer(resultSet.getInt("loyer"));
             String typeString = resultSet.getString("type");
-logement.setType(type.valueOf(typeString));
+            logement.setType(type.valueOf(typeString));
             logement.setRegion(resultSet.getString("region"));
+            logement.setImage(resultSet.getString("image"));
 
             // Add the logement to the list
             logements.add(logement);
@@ -255,6 +241,7 @@ logement.setType(type.valueOf(typeString));
 
         return logements;
     }
+
  
     @Override
    public void supprimerLogement(Logement t) {
@@ -262,7 +249,7 @@ logement.setType(type.valueOf(typeString));
 
         
      try {
-         String sql = "DELETE FROM logement WHERE id = ?";
+         String sql = "DELETE FROM logement WHERE idLogement = ?";
          PreparedStatement ps = con.prepareStatement(sql);
          ps.setInt(1, t.getId());
          
@@ -273,6 +260,33 @@ logement.setType(type.valueOf(typeString));
      }
             
     }
+     public Logement getLogementById(int id) throws SQLException {
+        String selectQuery = "SELECT * FROM logement WHERE idLogement = ?";
+        Logement logement = null;
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                logement = new Logement();
+                logement.setId(resultSet.getInt("idLogement"));
+                logement.setAdr(resultSet.getString("adrL"));
+                logement.setSuperfice(resultSet.getInt("superfice"));
+                logement.setLoyer(resultSet.getInt("loyer"));
+                String typeString = resultSet.getString("type");
+                logement.setType(type.valueOf(typeString));
+                logement.setRegion(resultSet.getString("region"));
+                logement.setImage(resultSet.getString("image"));
+            }
+        }
+
+        return logement;
+    }
+   
+   
+   
    /*private int getTypeId(String typeName) {
 int type = 0;
     String sql = "select idType from type where nomType=?";

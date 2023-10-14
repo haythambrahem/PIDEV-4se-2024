@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -83,8 +84,13 @@ public class LogementController implements Initializable {
 private ComboBox<String> cbLogementType;
  Connection con;
     Statement ste;
+                 Logement loge = new Logement();
+
+    
     @FXML
     private JFXListView<Logement> listView_logement;
+
+ 
     /**
      * Initializes the controller class.
      */
@@ -99,13 +105,10 @@ ServiceLogement serviceLogement = new ServiceLogement();
         List<Logement> logements = serviceLogement.affihcerLogement();
 ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
 listView_logement.setItems(logementList);
-  
+ 
         
     }    
 
-    @FXML
-    private void searchLogement(KeyEvent event) {
-    }
 
 
     @FXML
@@ -138,7 +141,7 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         logement.setLoyer(loyer);
         logement.setType(logementType);
         logement.setRegion(reg);
-
+        logement.setImage(lab_url.getText());
         // Set the Blob image data in logement using setImageBlob method (if applicable)
         // logement.setImageBlob(blob);
 
@@ -159,7 +162,6 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         txt_loyer.clear();
         cb_type.getSelectionModel().clearSelection(); // Clear the selected value in cb_type
         txt_region.clear();
-
         // Rest of your button click logic
     }
 }
@@ -167,117 +169,91 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
 // Read image data from the image file
 
     @FXML
-    private void modifierLogement(ActionEvent event) {
+    private void modifierLogement(ActionEvent event) throws SQLException {
+                Logement selectedLogement = listView_logement.getSelectionModel().getSelectedItem();
+
+    if (selectedLogement != null) {
+        int logementId = selectedLogement.getId();
+        ServiceLogement serviceLogement = new ServiceLogement();
+        Logement logement = serviceLogement.getLogementById(logementId);
+        System.out.println(logement.toString());
+        txt_adr.setText(logement.getAdr());
+        txt_superfice.setText(String.valueOf(logement.getSuperfice()));
+        txt_loyer.setText(String.valueOf(logement.getLoyer()));
+        txt_region.setText(logement.getRegion());
+        cb_type.setValue(logement.getType());
+        
+        
         String adr = txt_adr.getText();
-    String superf = txt_superfice.getText();
-    int superfice = 0;
-    
-    if (!superf.isEmpty()) {
-        try {
-            superfice = Integer.parseInt(superf);
-        } catch (NumberFormatException e) {
-            // Gérez le cas où l'entrée n'est pas un entier valide
-            // Vous pouvez afficher un message d'erreur ou prendre des mesures appropriées ici
-        }
+        String superf = txt_superfice.getText();
+        int superfice = Integer.parseInt(superf);
+        String loy = txt_loyer.getText();
+        int loyer = Integer.parseInt(loy);
+        type logementType = cb_type.getValue(); // Assuming you have cb_type for the logementType
+        String reg = txt_region.getText();
+        File image = new File(lab_url.getText());
+         if (adr.isEmpty() || reg.isEmpty() || logementType == null || superf == null || loy == null) {
+        // Show an error message if any required field is missing
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("Erreur");
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText("Veuillez remplir tous les champs obligatoires.");
+        errorAlert.showAndWait();
+    } else {
+             
+        logement.setAdr(adr);
+        logement.setSuperfice(superfice);
+        logement.setLoyer(loyer);
+        logement.setType(logementType);
+        logement.setRegion(reg);
+        logement.setImage(lab_url.getText());
+        
+             System.out.println(serviceLogement.getLogementById(logementId).toString());
+        serviceLogement.modifierLogement(logement);
+        // Show a success message
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle("Succès");
+        successAlert.setHeaderText(null);
+        successAlert.setContentText("Le logement a été modifier avec succès.");
+        successAlert.showAndWait();
+         List<Logement> logements = serviceLogement.affihcerLogement();
+        ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
+        listView_logement.setItems(logementList);
+
+        // Clear input fields and reset ComboBox selections
+        txt_adr.clear();
+        txt_superfice.clear();
+        txt_loyer.clear();
+        cb_type.getSelectionModel().clearSelection(); // Clear the selected value in cb_type
+        txt_region.clear();
+
+        // Rest of your button click logic
+    }
+        // Faites ce que vous devez avec l'ID, par exemple, affichez-le ou effectuez d'autres opérations
+        System.out.println("ID du logement sélectionné : " + logementId);
+        
     }
     
-    String loy = txt_loyer.getText();
-    int loyer = Integer.parseInt(loy);
- //   String typ = cb_type.getValue();
-    String reg = txt_region.getText();
-    
-    Logement logement = new Logement();
-    logement.setAdr(adr);
-    logement.setSuperfice(superfice);
-    logement.setLoyer(loyer);
- //   logement.setType(typ);
-    logement.setRegion(reg);
-    
-    // Remarque : vous devrez définir les autres propriétés du logement en fonction de votre logique
-    
-    ServiceLogement serviceLogement = new ServiceLogement(); // Initialisez avec votre connexion à la base de données
-    logement.setId(Integer.parseInt(txt_searchid.getText())); // Définissez l'ID du logement que vous souhaitez modifier
-    
-    //boolean modificationReussie = serviceLogement.modifierLogement(logement);
-serviceLogement.modifierLogement(logement);
-    //if (modificationReussie) {
-   //     showLogement();
-        lab_url.setText("aucune sélectionnée");
-        txt_adr.setText("");
-        txt_superfice.setText("");
-        txt_loyer.setText("");
-        txt_searchid.setText("");
-    //    cb_commune.setValue("commune");
-       // cb_province.setValue("province");
-       // cb_type.setValue("type");
-        txt_region.setText("region");
-        image_logement.setImage(null);
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setHeaderText(null);
-        alert.setContentText("Le logement a été modifié avec succès.");
-        alert.showAndWait();
-  /*  } else {
-        // Gérez le cas où la modification a échoué
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setHeaderText(null);
-        alert.setContentText("La modification du logement a échoué.");
-        alert.showAndWait();
-    }*/
-  /* String adr = txt_adr.getText();
-        int superficie = Integer.parseInt(txt_superfice.getText());
-        int loyer = Integer.parseInt(txt_loyer.getText());
-        String type = cbLogementType.getValue();
-        String region = txt_region.getText();
-
-        // Create a Logement object with the updated data
-        Logement logement = new Logement();
-        logement.setAdr(adr);
-        logement.setSuperfice(superficie);
-        logement.setLoyer(loyer);
-        logement.setType(type);
-        logement.setRegion(region);
-
-        // Get the Logement ID you want to update (for example, from a table or user selection)
-        int logementId = 1; // Replace with the actual ID
-
-        // Call the service to update the Logement
-        ServiceLogement logementService = new ServiceLogement(con);
-        logement.setId(logementId); // Set the ID for the Logement
-        Logement modifierLogement = logementService.modifierLogement(logement);
-
-        if (modifierLogement != null) {
-            // Logement was successfully updated
-            // You can also update the UI to reflect the changes
-        } else {
-            // Handle the case where the update failed, e.g., show an error message
-        }*/
-    
+   
 }
     
 
     @FXML
-    private void supprimerLogement(ActionEvent event) {
-        String adresse = txt_adr.getText(); // Obtenez l'adresse à partir de votre champ texte
-    ServiceLogement serviceLogement = new ServiceLogement(); // Initialisez avec votre connexion à la base de données
-    Logement logement = new Logement();
-    logement.setAdr(adresse);
-    serviceLogement.supprimerLogement(logement);
-      String adr = txt_adr.getText();
-        int superficie = Integer.parseInt(txt_superfice.getText());
-        int loyer = Integer.parseInt(txt_loyer.getText());
-        String type = cbLogementType.getValue();
-        String region = txt_region.getText();
+    private void supprimerLogement(ActionEvent event) throws SQLException {
+        Logement selectedLogement = listView_logement.getSelectionModel().getSelectedItem();
 
-        // Call the LogementService to delete Logement based on the criteria
-        ServiceLogement logementService = new ServiceLogement();
-     //   logementService.supprimerLogement(adr, superficie, loyer, type, region);
+    if (selectedLogement != null) {
+        int logementId = selectedLogement.getId();
+        ServiceLogement serviceLogement = new ServiceLogement();
+        Logement logement = serviceLogement.getLogementById(logementId);
 
-        // Handle the deletion result
-        // You can update the UI or display a message
-    }
+        serviceLogement.supprimerLogement(logement);
+         List<Logement> logements = serviceLogement.affihcerLogement();
+        ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
+        listView_logement.setItems(logementList);
+
+      
+    }}
 
     
 
@@ -299,6 +275,7 @@ serviceLogement.modifierLogement(logement);
    private final ObservableList<String> typeNames = FXCollections.observableArrayList();
 
     public void initialize() {
+        
         // Populate the typeNames list with enum names
         for (type t : type.values()) {
             typeNames.add(t.toString());
@@ -321,8 +298,69 @@ serviceLogement.modifierLogement(logement);
         });
     }
    
+//private void searchLogement(MouseEvent event) {
+//     if (txt_searchid != null) {
+//    String critere = txt_searchid.getText(); 
+//         System.out.println(critere);
+//         
+//         List<Logement> resultat = sl.rechercheLogement(critere);
+//
+//    // Créez une ObservableList à partir de la liste de résultats
+//    ObservableList<Logement> observableResultat = FXCollections.observableArrayList(resultat);
+//
+//    // Configurez votre ListView avec la nouvelle ObservableList
+//    listView_logement.setItems(observableResultat);
+//       } else {
+//        // Gérez la situation où txt_searchid est null
+//        System.out.println("txt_searchid est null");
+//    }}
+
     @FXML
-    private void searchLogement(MouseEvent event) {
+    private void listLogEvn(MouseEvent event) {
+
     }
+
+    @FXML
+    private void searchLogement(ActionEvent event) {
+
+         if (txt_searchid != null) {
+             
+    String critere = txt_searchid.getText(); 
+         System.out.println(critere);
+     ServiceLogement serviceLogement = new ServiceLogement(); // Créez une instance de ServiceLogement
+List<Logement> resultat = serviceLogement.rechercheLogement(critere); // Appelez la méthode sur l'instance
+
+resultat.forEach(logement -> {
+    txt_adr.setText(logement.getAdr());
+    txt_superfice.setText(String.valueOf(logement.getSuperfice()));
+    txt_loyer.setText(String.valueOf(logement.getLoyer()));
+    txt_region.setText(logement.getRegion());
+    cb_type.setValue(logement.getType());
+    
+            System.out.println(logement.getImage());
+
+    // Vérifiez si le chemin du fichier image n'est pas vide avant de créer l'objet Image
+    if (logement.getImage() != null && !logement.getImage().isEmpty()) {
+        String fileUrl = new File(logement.getImage()).toURI().toString();
+        System.out.println(fileUrl);
+        Image image = new Image(fileUrl);
+        image_logement.setImage(image);
+    } else {
+        // Gérez le cas où le chemin du fichier image est vide ou null
+        // Peut-être afficher une image par défaut
+    }
+});
+    // Créez une ObservableList à partir de la liste de résultats
+    ObservableList<Logement> observableResultat = FXCollections.observableArrayList(resultat);
+    // Configurez votre ListView avec la nouvelle ObservableList
+    listView_logement.setItems(observableResultat);
+       } else {
+        // Gérez la situation où txt_searchid est null
+        System.out.println("txt_searchid est null");
+    }
+
+    }
+    
+
     
 }

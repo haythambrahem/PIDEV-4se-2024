@@ -7,6 +7,7 @@ package interfaces;
 
 import com.jfoenix.controls.JFXTextField;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
@@ -59,68 +60,28 @@ public class AccueilController implements Initializable {
     private Button LIKE_btn;
 
    private ServiceShowLog serviceShowLog;
+   
+   
+   
     @FXML
     private void ShowPrecedant() {
           String adr = txt_adr.getText();
     try {
         ServiceShowLog service = new ServiceShowLog();
-        int position;
-        
-         position = service.getPositionByAdr(adr);
-        position--;
+        int position = service.getPositionByAdr(adr);
+        //position--;
         service.loadPreviousLogementData(position, this);
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
-        /*  String adr = txt_adr.getText();
-          String sql3="select idLogement from logement where adrL ='"+adr+"'"; 
-        int position=0;
-          try {
-            st=cnx.prepareStatement(sql3);
-            result=st.executeQuery();
-            if(result.next()){
-                position=result.getInt("idLogement");
-                
-                
-            }
-        } catch (SQLException ex) {
-        }
-    //    System.out.println(position);
-        
-        String sql4="select loyer, superfice, region,adrL,image from logement where idLogement not in (select logement from location) and idLogement not in (select logement from location)and idLogement <'"+position+"'";
-        int loyer=0;
-      int superfice;
-      
-      byte byteImg[];
-      
-              Blob blob;
-        try {
-            st= cnx.prepareStatement(sql4);
-            result=st.executeQuery();
-             if(result.next()) {
-                loyer=result.getInt("loyer");
-                txt_loyer.setText(Integer.toString(loyer));
-                superfice=result.getInt("superfice");
-                txt_superfice.setText(Integer.toString(superfice));
-                txt_region.setText(result.getString("region"));
-                txt_adr.setText(result.getString("adrL"));
-                blob=result.getBlob("image");
-                byteImg=blob.getBytes(1,(int) blob.length());
-              //  Image img= new Image(new ByteArryInputStream(byte Img),imageLog.getFitWidth(),imageLog.getFitHeight(),true,true);
-                ByteArrayInputStream inputStream = new ByteArrayInputStream(byteImg);
-        Image img = new Image(inputStream);
-        imageLog.setImage(img); 
-            }
-            
-            
-        } catch (SQLException ex) {
-        }*/
     }
 
     @FXML
     private void ShowSuivant() {
              String adr = txt_adr.getText();
        try {
+           int count = serviceShowLog.getAvailableLogementCount();
+        lab_nbr.setText(Integer.toString(count));
         ServiceShowLog service = new ServiceShowLog(); // Create an instance
         int position = service.getPositionByAdr(adr); // Call the non-static method
         service.loadNextLogementData(position, this);
@@ -192,17 +153,7 @@ public void showLogement(){
         // You should set the image if your UI allows image display.
         // imageLog.setImage(details.getImage());
         
-    byte[] imageData = details.getImageData();
-
-    if (imageData != null) {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
-        Image img = new Image(inputStream);
-        imageLog.setImage(img);
-    } else {
-        // Handle the case where there is no image data
-        // For example, you can set a default image or display a placeholder image.
-        // imageLog.setImage(defaultImage);
-    }
+    
     }
 
         
@@ -212,7 +163,8 @@ public void showLogement(){
         
        
         
-             showLogement();
+             ShowSuivant();
+             
        
            
         
@@ -250,25 +202,30 @@ public void showLogement(){
         */
     }     
 
-    public void updateUI(int loyer, String region, String adrL, byte[] byteImg) {
+    public void updateUI(int loyer, String region, String adrL, String Img) {
 // Assuming you have JavaFX components in your controller class
     txt_loyer.setText(Integer.toString(loyer)); // Update a text field for rent
     txt_region.setText(region); // Update a text field for region
     txt_adr.setText(adrL); // Update a text field for address
 
     // Convert the byte array to an Image and set it to an ImageView
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(byteImg);
-    Image img = new Image(inputStream);
-    imageLog.setImage(img);    }
+  
+   String fileUrl = new File(Img).toURI().toString();
+Image image = new Image(fileUrl);
+imageLog.setImage(image);
+    }
 
-    public void updateUI(int loyer, String region, String adrL, int superfice, byte[] byteImg) {
+    public void updateUI(int loyer, String region, String adrL, int superfice, String Img) {
 //Assuming you have JavaFX components in your controller class
     txt_loyer.setText(Integer.toString(loyer)); // Update a text field for rent
     txt_region.setText(region); // Update a text field for region
     txt_adr.setText(adrL); // Update a text field for address
     txt_superfice.setText(Integer.toString(superfice));
     // Convert the byte array to an Image and set it to an ImageView
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(byteImg);
-    Image img = new Image(inputStream);
-    imageLog.setImage(img);    }    
+    
+    String fileUrl = new File(Img).toURI().toString();
+Image image = new Image(fileUrl);
+imageLog.setImage(image);
+
+    }    
 }

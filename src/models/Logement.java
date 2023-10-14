@@ -24,7 +24,7 @@ import java.util.Objects;
     private int loyer;
     private type type;
     private String region;
-   private Blob image;
+   private String image;
 
     // Constructors
 
@@ -32,15 +32,13 @@ import java.util.Objects;
     public Logement() {
     }
 
-    public Logement(int i, String ibtihel, String ben_mustfa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
-    public Logement(int id, String adr, int superfice, int loyer, type type, String region, Blob image) {
+    public Logement(int id, String adr, int superfice, int loyer, type type, String region, String image) {
         this.id = id;
         this.adr = adr;
         this.superfice = superfice;
@@ -50,7 +48,7 @@ import java.util.Objects;
         this.image = image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -137,27 +135,27 @@ public String toString() {
            ", region='" + region + '\'' +
            '}';
 }
- public byte[] getImageData() {
-        if (image == null) {
-            return null; // Return null if no image data is present
-        }
-
-        try {
-            // Convert the Blob to a byte array
-            InputStream inputStream = image.getBinaryStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-
-            return outputStream.toByteArray();
-        } catch (SQLException | IOException e) {
-            e.printStackTrace(); // Handle exceptions as needed
-            return null; // Return null in case of an error
-        }
-    }
+// public byte[] getImageData() {
+//        if (image == null) {
+//            return null; // Return null if no image data is present
+//        }
+//
+//        try {
+//            // Convert the Blob to a byte array
+//            InputStream inputStream = image.getBinaryStream();
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//            byte[] buffer = new byte[4096];
+//            int bytesRead = -1;
+//
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, bytesRead);
+//            }
+//
+//            return outputStream.toByteArray();
+//        } catch (SQLException | IOException e) {
+//            e.printStackTrace(); // Handle exceptions as needed
+//            return null; // Return null in case of an error
+//        }
+//    }
     // Additional methods if needed
 }
