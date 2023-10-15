@@ -74,12 +74,12 @@
       <JFXDatePicker fx:id="dateFin" layoutX="476.0" layoutY="324.0" onAction="#periode" prefHeight="25.0" prefWidth="108.0" promptText="Date fin" />
       <JFXTextField fx:id="txt_periode" layoutX="593.0" layoutY="330.0" prefHeight="25.0" prefWidth="55.0" />
       <Label layoutX="656.0" layoutY="341.0" text="Label" />
-      <JFXButton layoutX="245.0" layoutY="23.0" onMouseClicked="#searchLogement" prefHeight="17.0" prefWidth="0.0">
+      <JFXButton layoutX="245.0" layoutY="23.0" onAction="#searchLogement" prefHeight="17.0" prefWidth="0.0">
          <graphic>
             <FontAwesomeIcon glyphName="SEARCH" />
          </graphic>
       </JFXButton>
-      <JFXButton layoutX="258.0" layoutY="208.0" onMouseClicked="#searchLocataire" prefHeight="17.0" prefWidth="15.0">
+      <JFXButton layoutX="258.0" layoutY="208.0" onAction="#searchLocataire" prefHeight="17.0" prefWidth="15.0">
          <graphic>
             <FontAwesomeIcon glyphName="SEARCH" />
          </graphic>

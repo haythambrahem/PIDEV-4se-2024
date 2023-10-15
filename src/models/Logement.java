@@ -126,14 +126,11 @@ import java.util.Objects;
 }
 @Override
 public String toString() {
-    return "Logement{" +
-           "id=" + id +
-           ", adr='" + adr + '\'' +
-           ", superfice=" + superfice +
-           ", loyer=" + loyer +
-           ", type='" + type + '\'' +
-           ", region='" + region + '\'' +
-           '}';
+    return " l'adresse est " + adr + 
+           ", avec une superfice de " + superfice +
+           ", son loyer est " + loyer +
+           ", de type " + type + 
+           ", dans region " + region ;
 }
 // public byte[] getImageData() {
 //        if (image == null) {

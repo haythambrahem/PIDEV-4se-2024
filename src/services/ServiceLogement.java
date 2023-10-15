@@ -71,29 +71,7 @@ String type = t.getType().toString();
     }
 }
 
-/*
-    @Override
-    public void supprimerLogement(String adr, int superficie, int loyer, String type, String region) {
-       /*   String sql = "DELETE FROM logement WHERE idLogement = ?";
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setInt(1, t.getId());
-        int rowsAffected = ps.executeUpdate();
-        if (rowsAffected > 0) {
-            System.out.println("Logement supprimé avec succès.");
-        } else {
-            System.out.println("Logement non trouvé avec l'adresse : " + t.getAdr());
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }*/
-        // Call rechercheLogement to get the list of Logement entities that match the criteria
-      /*  List<Logement> logementsToDelete = rechercheLogement(adr, superficie, loyer, type, region);
 
-        for (Logement logement : logementsToDelete) {
-            // Delete each matching Logement entity
-            supprimerLogement(logement.getAdr(),logement.getSuperfice(),logement.getLoyer(),logement.getType(),logement.getRegion());
-        }
-    }*/
     
 public List<Logement> rechercheLogement(String critere) {
     String selectQuery = "SELECT * FROM logement WHERE adrL LIKE ?";
@@ -287,21 +265,7 @@ logement.setType(type.valueOf(typeString));
    
    
    
-   /*private int getTypeId(String typeName) {
-int type = 0;
-    String sql = "select idType from type where nomType=?";
-    try {
-        PreparedStatement ste = con.prepareStatement(sql); // Use PreparedStatement here
-        ste.setString(1, typeName);
-        ResultSet result = ste.executeQuery();
-        if (result.next()) {
-            type = result.getInt("idType");
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return type;
-}*/
+   
     }
     
     

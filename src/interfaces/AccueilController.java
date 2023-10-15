@@ -21,11 +21,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import models.LogementDetails;
 import services.ServiceLogement;
 import services.ServiceShowLog;
@@ -181,25 +184,26 @@ public void showLogement(){
         String loyer = txt_loyer.getText();
         String superfice = txt_superfice.getText();
         ServiceLogement ps = new ServiceLogement();
-      //  Logement p = new Logement(nom, prenom);
-       // ps.ajouter(p);
-     /*   
-        try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().
-                getResource("Location.fxml"));
+     
+       try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Location.fxml"));
             Parent root = loader.load();
-        LocationController ac = loader.getController();
-        ac.setAdr(txt_adr.getText());
-        ac.setLoyer(txt_loyer.getText());
-      //  ac.setLoyer(txt_type.getText());
-      ac.setRegion(txt_region.getText());
-        ac.setRecList(ps.affihcer().toString());
-        txtprenom.getScene().setRoot(root);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+
+            // Create the new scene
+            Scene newScene = new Scene(root);
+
+            // Get the current stage
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            currentStage.setScene(newScene);
+
+            // Show the new scene
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        */
     }     
 
     public void updateUI(int loyer, String region, String adrL, String Img) {

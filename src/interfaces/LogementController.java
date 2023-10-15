@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,8 +21,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -31,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import models.Logement;
 import models.type;
@@ -56,20 +63,6 @@ public class LogementController implements Initializable {
     @FXML
     private Label lab_url;
     @FXML
-    private TableView<?> table_logement;
-    @FXML
-    private TableColumn<?, ?> col_id;
-    @FXML
-    private TableColumn<?, ?> col_adr;
-    @FXML
-    private TableColumn<?, ?> col_superfice;
-    @FXML
-    private TableColumn<?, ?> col_loyer;
-    @FXML
-    private TableColumn<?, ?> col_type;
-    @FXML
-    private TableColumn<?, ?> col_region;
-    @FXML
     private JFXButton btn_add;
     @FXML
     private JFXButton btn_edit;
@@ -89,6 +82,8 @@ private ComboBox<String> cbLogementType;
     
     @FXML
     private JFXListView<Logement> listView_logement;
+    @FXML
+    private Button LogAccueil;
 
  
     /**
@@ -111,18 +106,14 @@ listView_logement.setItems(logementList);
 
 
 
-    @FXML
-    private void tableLogEvent(MouseEvent event) {
-    }
 ObservableList<type> types = FXCollections.observableArrayList(type.values());
 
     @FXML
     private void ajouterLogement(ActionEvent event) {
      String adr = txt_adr.getText();
     String superf = txt_superfice.getText();
-    int superfice = Integer.parseInt(superf);
+   
     String loy = txt_loyer.getText();
-    int loyer = Integer.parseInt(loy);
     type logementType = cb_type.getValue(); // Assuming you have cb_type for the logementType
     String reg = txt_region.getText();
     File image = new File(lab_url.getText());
@@ -135,6 +126,9 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         errorAlert.setContentText("Veuillez remplir tous les champs obligatoires.");
         errorAlert.showAndWait();
     } else {
+         int superfice = Integer.parseInt(superf);
+             int loyer = Integer.parseInt(loy);
+
         Logement logement = new Logement();
         logement.setAdr(adr);
         logement.setSuperfice(superfice);
@@ -155,7 +149,9 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         successAlert.setHeaderText(null);
         successAlert.setContentText("Le logement a été ajouté avec succès.");
         successAlert.showAndWait();
-
+         List<Logement> logements = serviceLogement.affihcerLogement();
+        ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
+        listView_logement.setItems(logementList);
         // Clear input fields and reset ComboBox selections
         txt_adr.clear();
         txt_superfice.clear();
@@ -170,25 +166,19 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
 
     @FXML
     private void modifierLogement(ActionEvent event) throws SQLException {
-                Logement selectedLogement = listView_logement.getSelectionModel().getSelectedItem();
+                
+        Logement selectedLogement = listView_logement.getSelectionModel().getSelectedItem();
 
     if (selectedLogement != null) {
         int logementId = selectedLogement.getId();
         ServiceLogement serviceLogement = new ServiceLogement();
         Logement logement = serviceLogement.getLogementById(logementId);
-        System.out.println(logement.toString());
-        txt_adr.setText(logement.getAdr());
-        txt_superfice.setText(String.valueOf(logement.getSuperfice()));
-        txt_loyer.setText(String.valueOf(logement.getLoyer()));
-        txt_region.setText(logement.getRegion());
-        cb_type.setValue(logement.getType());
-        
         
         String adr = txt_adr.getText();
         String superf = txt_superfice.getText();
-        int superfice = Integer.parseInt(superf);
+        
         String loy = txt_loyer.getText();
-        int loyer = Integer.parseInt(loy);
+        
         type logementType = cb_type.getValue(); // Assuming you have cb_type for the logementType
         String reg = txt_region.getText();
         File image = new File(lab_url.getText());
@@ -200,7 +190,8 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         errorAlert.setContentText("Veuillez remplir tous les champs obligatoires.");
         errorAlert.showAndWait();
     } else {
-             
+         int superfice = Integer.parseInt(superf);
+         int loyer = Integer.parseInt(loy);
         logement.setAdr(adr);
         logement.setSuperfice(superfice);
         logement.setLoyer(loyer);
@@ -226,7 +217,7 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         txt_loyer.clear();
         cb_type.getSelectionModel().clearSelection(); // Clear the selected value in cb_type
         txt_region.clear();
-
+       // image_logement.clear();  
         // Rest of your button click logic
     }
         // Faites ce que vous devez avec l'ID, par exemple, affichez-le ou effectuez d'autres opérations
@@ -298,25 +289,30 @@ ObservableList<type> types = FXCollections.observableArrayList(type.values());
         });
     }
    
-//private void searchLogement(MouseEvent event) {
-//     if (txt_searchid != null) {
-//    String critere = txt_searchid.getText(); 
-//         System.out.println(critere);
-//         
-//         List<Logement> resultat = sl.rechercheLogement(critere);
-//
-//    // Créez une ObservableList à partir de la liste de résultats
-//    ObservableList<Logement> observableResultat = FXCollections.observableArrayList(resultat);
-//
-//    // Configurez votre ListView avec la nouvelle ObservableList
-//    listView_logement.setItems(observableResultat);
-//       } else {
-//        // Gérez la situation où txt_searchid est null
-//        System.out.println("txt_searchid est null");
-//    }}
+
 
     @FXML
-    private void listLogEvn(MouseEvent event) {
+    private void listLogEvn(MouseEvent event) throws SQLException {
+                Logement selectedLogement = listView_logement.getSelectionModel().getSelectedItem();
+    if (selectedLogement != null) {
+        int logementId = selectedLogement.getId();
+        ServiceLogement serviceLogement = new ServiceLogement();
+        Logement logement = serviceLogement.getLogementById(logementId);
+
+        // Populate the input fields with the selected Logement's data
+        txt_adr.setText(logement.getAdr());
+        txt_superfice.setText(String.valueOf(logement.getSuperfice()));
+        txt_loyer.setText(String.valueOf(logement.getLoyer()));
+        cb_type.setValue(logement.getType());
+        txt_region.setText(logement.getRegion());
+        // Update the lab_url based on the Logement's image path
+        lab_url.setText(logement.getImage());
+        File imageFile = new File(logement.getImage());
+        Image image = new Image(imageFile.toURI().toString());
+        image_logement.setImage(image);
+                
+                
+    }
 
     }
 
@@ -360,7 +356,30 @@ resultat.forEach(logement -> {
     }
 
     }
+
+    @FXML
+    private void logementTOaccueil(ActionEvent event) throws IOException {
+           try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueil.fxml"));
+            Parent root = loader.load();
+
+            // Create the new scene
+            Scene newScene = new Scene(root);
+
+            // Get the current stage
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            currentStage.setScene(newScene);
+
+            // Show the new scene
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
     
 
-    
-}
+

@@ -10,7 +10,7 @@ package models;
  * @author FADI
  */
 public enum type {
-    maison,studio,appartement
+    maison,studio,appartement,hotel
     
     
 }
