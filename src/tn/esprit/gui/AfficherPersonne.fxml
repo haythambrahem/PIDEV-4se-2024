@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.AfficherPersonneController">
+   <children>
+      <Label layoutX="43.0" layoutY="33.0" text="Nom" />
+      <Label layoutX="35.0" layoutY="84.0" text="Prenom" />
+      <TextField fx:id="recNom" editable="false" layoutX="97.0" layoutY="29.0" />
+      <TextField fx:id="recPrenom" editable="false" layoutX="97.0" layoutY="80.0" />
+      <TextField fx:id="recList" editable="false" layoutX="14.0" layoutY="260.0" prefHeight="125.0" prefWidth="303.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="67.0" layoutY="126.0" prefHeight="25.0" prefWidth="209.0" text="Liste des utilisateurs">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="317.0" prefHeight="400.0" prefWidth="282.0" style="-fx-background-color: #255;">
+         <children>
+            <Text fill="WHITE" layoutX="18.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Eventini" wrappingWidth="263.51171875">
+               <font>
+                  <Font name="System Bold" size="54.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <ListView fx:id="Vlist" layoutX="14.0" layoutY="200.0" prefHeight="200.0" prefWidth="303.0" />
+   </children>
+</AnchorPane>
