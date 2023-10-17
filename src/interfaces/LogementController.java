@@ -90,6 +90,8 @@ private ComboBox<String> cbLogementType;
     private JFXListView<Logement> listView_logement;
     @FXML
     private Button LogAccueil;
+    @FXML
+    private Button refreshButton;
 
  
     /**
@@ -232,26 +234,33 @@ File image = new File(lab_url.getText());
         // Update the logement using your service
         ServiceLogement serviceLogement = new ServiceLogement();
         serviceLogement.modifierLogement(selectedLogement);
+//        List<Logement> logements = serviceLogement.affihcerLogement();
+//        ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
+//        listView_logement.setItems(logementList);
+  // Remove the selected logement from the list
+    listView_logement.getItems().remove(selectedLogement);
 
-        // Show a success message
-        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setTitle("Succès");
-        successAlert.setHeaderText(null);
-        successAlert.setContentText("Le logement a été modifié avec succès.");
-        successAlert.showAndWait();
-
-        // Refresh the list of logements in the ListView
-        List<Logement> logements = serviceLogement.affihcerLogement();
-        ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
-        listView_logement.setItems(logementList);
-
-        // Clear input fields and reset ComboBox selections
+    // Add the updated logement back to the list
+    listView_logement.getItems().add(selectedLogement);
+      //   listView_logement.getSelectionModel().clearSelection();
+       // Clear input fields and reset ComboBox selections
         txt_adr.clear();
         txt_superfice.clear();
         txt_loyer.clear();
         cb_type.getSelectionModel().clearSelection();
         txt_region.clear();
          image_logement.setImage(null);
+         listView_logement.getSelectionModel().clearSelection();
+      // Show a success message
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle("Succès");
+        successAlert.setHeaderText(null);
+        successAlert.setContentText("Le logement a été modifié avec succès.");
+        successAlert.showAndWait();
+  // Refresh the list of logements in the ListView
+       
+       
+       
     }
 }
     
@@ -458,6 +467,14 @@ File image = new File(lab_url.getText());
         return null;
     }
 });
+
+    @FXML
+    private void handleRefreshButton(ActionEvent event) {
+          ServiceLogement serviceLogement = new ServiceLogement();
+    List<Logement> logements = serviceLogement.affihcerLogement();
+    ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
+    listView_logement.setItems(logementList);
+    }
 
     }
     

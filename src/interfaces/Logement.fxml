@@ -19,36 +19,43 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_searchid" layoutX="174.0" layoutY="41.0" promptText="Adresse" unFocusColor="#4688c9" />
+      <JFXTextField fx:id="txt_searchid" layoutX="174.0" layoutY="41.0" prefHeight="25.0" prefWidth="146.0" promptText="Adresse" unFocusColor="#4688c9" />
       <JFXTextField fx:id="txt_adr" layoutX="24.0" layoutY="102.0" prefHeight="25.0" prefWidth="243.0" promptText="Adresse" unFocusColor="#4688c9" />
       <JFXTextField fx:id="txt_superfice" layoutX="290.0" layoutY="150.0" promptText="Superfice" unFocusColor="#4688c9" />
       <JFXComboBox fx:id="cb_type" layoutX="29.0" layoutY="150.0" prefHeight="31.0" prefWidth="232.0" promptText="type" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_loyer" layoutX="174.0" layoutY="220.0" promptText="loyer" unFocusColor="#4688c9" />
-      <Label fx:id="lab_url" layoutX="527.0" layoutY="226.0" prefHeight="19.0" prefWidth="157.0" text="Aucune sélectionée" textFill="#4688c9">
+      <JFXTextField fx:id="txt_loyer" layoutX="174.0" layoutY="214.0" prefHeight="31.0" prefWidth="146.0" promptText="loyer" unFocusColor="#4688c9" />
+      <Label fx:id="lab_url" layoutX="572.0" layoutY="232.0" prefHeight="26.0" prefWidth="219.0" text="Aucune sélectionée" textFill="#4688c9">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
       <JFXButton fx:id="btn_add" layoutX="14.0" layoutY="617.0" onAction="#ajouterLogement" prefHeight="31.0" prefWidth="90.0" styleClass="buttons" text="Ajouter" />
       <JFXButton fx:id="btn_edit" layoutX="401.0" layoutY="617.0" onAction="#modifierLogement" prefHeight="31.0" prefWidth="103.0" styleClass="buttons" text="Modifier" />
-      <JFXButton fx:id="btn_delete" layoutX="754.0" layoutY="617.0" onAction="#supprimerLogement" styleClass="buttons" text="Supprimer" />
-      <JFXButton fx:id="icon_importer" layoutX="472.0" layoutY="220.0" onMouseClicked="#importerImage" prefHeight="25.0" prefWidth="11.0">
+      <JFXButton fx:id="btn_delete" layoutX="729.0" layoutY="617.0" onAction="#supprimerLogement" prefHeight="31.0" prefWidth="97.0" styleClass="buttons" text="Supprimer" />
+      <JFXButton fx:id="icon_importer" layoutX="504.0" layoutY="227.0" onMouseClicked="#importerImage" prefHeight="25.0" prefWidth="11.0">
+         <font>
+            <Font size="13.0" />
+         </font>
          <graphic>
-            <FontAwesomeIcon glyphName="UPLOAD" />
+            <FontAwesomeIcon glyphName="UPLOAD" size="2em" />
          </graphic>
       </JFXButton>
-      <JFXButton layoutX="298.0" layoutY="41.0" onAction="#searchLogement" prefHeight="19.0" prefWidth="0.0">
+      <JFXButton layoutX="319.0" layoutY="41.0" onAction="#searchLogement" prefHeight="19.0" prefWidth="0.0">
          <graphic>
             <FontAwesomeIcon glyphName="SEARCH" />
          </graphic>
       </JFXButton>
-      <Pane layoutX="472.0" layoutY="25.0" prefHeight="184.0" prefWidth="359.0">
+      <Pane layoutX="472.0" layoutY="25.0" prefHeight="210.0" prefWidth="365.0">
          <children>
-            <ImageView fx:id="image_logement" fitHeight="184.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image_logement" fitHeight="210.0" fitWidth="359.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
       <JFXTextField fx:id="txt_region" layoutX="290.0" layoutY="102.0" promptText="Region" unFocusColor="#4688c9" />
-      <Button fx:id="LogAccueil" layoutX="23.0" layoutY="220.0" mnemonicParsing="false" onAction="#logementTOaccueil" text="Button" />
+      <Button fx:id="LogAccueil" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#logementTOaccueil" text="nav">
+         <graphic>
+            <FontAwesomeIcon glyphName="CHEVRON_LEFT" />
+         </graphic></Button>
       <JFXListView fx:id="listView_logement" layoutX="35.0" layoutY="266.0" onMouseClicked="#listLogEvn" prefHeight="340.0" prefWidth="787.0" />
+      <Button fx:id="refreshButton" layoutX="242.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleRefreshButton" prefHeight="25.0" prefWidth="17.0" text="ref" />
    </children>
 </AnchorPane>

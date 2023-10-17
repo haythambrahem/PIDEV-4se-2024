@@ -21,7 +21,6 @@ public class Location {
     private int tarif;
 
     public Location(int id, Logement logement, Locataire locataire, java.util.Date dateDebut, java.util.Date dateFin, int tarif) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 public Logement getLogement() {
         return logement;

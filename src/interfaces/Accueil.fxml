@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="414.0" prefWidth="700.0" styleClass="backgrnd" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaces.AccueilController">
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="825.0" styleClass="backgrnd" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaces.AccueilController">
     <children>
       <Pane layoutX="217.0" layoutY="30.0" prefHeight="40.0" prefWidth="660.0" style="-fx-background-color: #7294AC;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -27,45 +27,51 @@
             <Label layoutX="148.0" layoutY="12.0" prefHeight="21.0" prefWidth="33.0" text=")" />
          </children>
       </Pane>
-      <JFXTextField fx:id="txt_loyer" layoutX="399.0" layoutY="195.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
-      <Label layoutX="410.0" layoutY="168.0" text="Loyer" textFill="#4688c9">
+      <JFXTextField fx:id="txt_loyer" layoutX="457.0" layoutY="260.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
+      <Label layoutX="477.0" layoutY="233.0" text="Loyer" textFill="#4688c9">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_superfice" layoutX="399.0" layoutY="266.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
-      <Label layoutX="410.0" layoutY="239.0" text="Superfice" textFill="#4688c9">
+      <JFXTextField fx:id="txt_superfice" layoutX="466.0" layoutY="334.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
+      <Label layoutX="467.0" layoutY="307.0" text="Superfice" textFill="#4688c9">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_region" layoutX="410.0" layoutY="318.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
-      <Label layoutX="420.0" layoutY="291.0" text="Region" textFill="#4688c9">
+      <JFXTextField fx:id="txt_region" layoutX="466.0" layoutY="433.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
+      <Label layoutX="477.0" layoutY="392.0" text="Region" textFill="#4688c9">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="precedant" layoutX="95.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#ShowPrecedant">
+      <Button fx:id="precedant" layoutX="103.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#ShowPrecedant" prefHeight="40.0" prefWidth="39.0">
          <graphic>
             <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_LEFT" size="17" />
          </graphic>
       </Button>
-      <Button fx:id="suivant" layoutX="197.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#ShowSuivant">
+      <Button fx:id="suivant" layoutX="294.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#ShowSuivant" prefHeight="40.0" prefWidth="39.0">
          <graphic>
             <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_RIGHT" size="17" />
          </graphic>
       </Button>
-      <JFXTextField fx:id="txt_adr" layoutX="399.0" layoutY="143.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
-      <Label layoutX="410.0" layoutY="116.0" text="Adresse" textFill="#4688c9">
+      <JFXTextField fx:id="txt_adr" layoutX="466.0" layoutY="181.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
+      <Label layoutX="474.0" layoutY="137.0" text="Adresse" textFill="#4688c9">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Pane layoutX="20.0" layoutY="73.0" prefHeight="238.0" prefWidth="338.0">
+      <Pane layoutX="31.0" layoutY="77.0" prefHeight="339.0" prefWidth="395.0">
          <children>
-            <ImageView fx:id="imageLog" fitHeight="238.0" fitWidth="338.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageLog" fitHeight="339.0" fitWidth="395.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Button fx:id="LIKE_btn" layoutX="605.0" layoutY="371.0" mnemonicParsing="false" onAction="#gotolocation" text="LIKE" />
+      <Button fx:id="LIKE_btn" layoutX="705.0" layoutY="507.0" mnemonicParsing="false" onAction="#gotolocation" prefHeight="40.0" prefWidth="90.0" text="next">
+         <graphic>
+            <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_RIGHT" size="17" wrappingWidth="12.142857551574707" />
+         </graphic>
+         <font>
+            <Font size="19.0" />
+         </font></Button>
    </children>
 </AnchorPane>

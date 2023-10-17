@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import models.Locataire;
@@ -169,6 +170,43 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
     } catch (SQLException e) {
         e.printStackTrace();
         return false;
+    }
+}
+   public List<Location> searchLocationsByCriteria(String critere) {
+      String selectQuery = "SELECT * FROM location WHERE logement LIKE ?";
+
+    try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
+        preparedStatement.setString(1, "%" + critere + "%"); // Utilize % for partial search
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Location> locations = new ArrayList<>();
+
+        while (resultSet.next()) {
+            // Retrieve location details from the result set and create Location objects
+            int id = resultSet.getInt("idLocation");
+            int logementId = resultSet.getInt("logement");
+            int locataireId = resultSet.getInt("locataire");
+            Date dateDebut = resultSet.getDate("dateDebut");
+            Date dateFin = resultSet.getDate("dateFin");
+            int tarif = resultSet.getInt("tarif");
+
+            // Use the service classes to get Logement and Locataire objects by their IDs
+            ServiceLogement serviceLogement = new ServiceLogement();
+            ServiceLocataire serviceLocataire = new ServiceLocataire();
+
+            Logement logement = serviceLogement.getLogementById(logementId);
+            Locataire locataire = serviceLocataire.getLocataireById(locataireId);
+
+            // Create Location object and add it to the list
+            Location location = new Location(id, logement, locataire, dateDebut, dateFin, tarif);
+            locations.add(location);
+        }
+
+        return locations;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Handle the exceptions appropriately here
+        return Collections.emptyList(); // Return an empty list if an error occurs
     }
 }
 }
