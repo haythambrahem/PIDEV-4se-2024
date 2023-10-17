@@ -84,6 +84,11 @@ public Logement getLogement() {
         this.tarif = tarif;
     }
 
+    @Override
+    public String toString() {
+        return "Location{" + "id=" + id + ", logement=" + logement + ", locataire=" + locataire + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", tarif=" + tarif + '}';
+    }
+
    
     
     
