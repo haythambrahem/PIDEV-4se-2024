@@ -34,7 +34,7 @@ public class ServiceShowLog {
         int count = 0;
         try {
             // Perform a database query to get the count of available logements.
-            String sql = "SELECT COUNT(*) FROM logement";
+            String sql = "SELECT COUNT(*) FROM logement where idLogement not in (select logement from location)";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             if (result.next()) {

@@ -62,14 +62,30 @@ public class ServiceLocataire {
 
         if (resultSet.next()) {
             locataire = new Locataire();
-            locataire.setId(resultSet.getInt("idLocataire"));
+            locataire.setId(resultSet.getInt("idL"));
             locataire.setNomprenom(resultSet.getString("nomprenomL"));
-            locataire.setTele(resultSet.getString("tele"));
+            locataire.setTele(resultSet.getString("teleL"));
             locataire.setDateNaise(resultSet.getDate("datenaissL"));
+            locataire.setCin(resultSet.getString("CIN"));
             // Vous pouvez continuer à définir d'autres propriétés du locataire ici
         }
     }
 
     return locataire;
+}
+    public int retrieveLocataireIdByCIN(String cin) {
+    try {
+        String sql = "SELECT idL FROM locataire WHERE CIN = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setString(1, cin);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            return resultSet.getInt("idL");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0; // Return 0 if no matching locataire is found.
 }
 }

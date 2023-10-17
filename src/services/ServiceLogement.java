@@ -104,7 +104,37 @@ public List<Logement> rechercheLogement(String critere) {
         return Collections.emptyList();
     }
 }
+public List<Logement> rechercheLogement2(String adrCritere, String regionCritere) {
+    String selectQuery = "SELECT * FROM logement WHERE adrL LIKE ? AND region LIKE ?";
 
+    try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
+        preparedStatement.setString(1, "%" + adrCritere + "%"); // Utilize % for partial search
+        preparedStatement.setString(2, "%" + regionCritere + "%"); // Utilize % for partial search
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Logement> logements = new ArrayList<>();
+
+        while (resultSet.next()) {
+            Logement logement = new Logement();
+            logement.setId(resultSet.getInt("idLogement"));
+            logement.setAdr(resultSet.getString("adrL"));
+            logement.setSuperfice(resultSet.getInt("superfice"));
+            logement.setLoyer(resultSet.getInt("loyer"));
+            logement.setRegion(resultSet.getString("region"));
+            logement.setType(type.valueOf(resultSet.getString("type")));
+            logement.setImage(resultSet.getString("image"));
+            // Other logement attributes
+
+            logements.add(logement);
+        }
+
+        return logements;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Handle appropriate exceptions here
+        return Collections.emptyList();
+    }
+}
 
    @Override
    public void modifierLogement(Logement t) {
@@ -263,7 +293,21 @@ logement.setType(type.valueOf(typeString));
         return logement;
     }
    
-   
+   public int retrieveLogementIdByAdr(String address) {
+    try {
+        String sql = "SELECT idLogement FROM logement WHERE adrL = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setString(1, address);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            return resultSet.getInt("idLogement");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0; // Return 0 if no matching logement is found.
+}
    
    
     }

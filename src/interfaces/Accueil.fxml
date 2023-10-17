@@ -19,12 +19,12 @@
                </font>
             </Label>
             <FontAwesomeIcon fill="WHITE" glyphName="HOME" layoutX="8.0" layoutY="24.0" size="17" />
-            <Label fx:id="lab_nbr" layoutX="127.0" layoutY="10.0" prefHeight="21.0" prefWidth="16.0" textFill="WHITE">
+            <Label fx:id="lab_nbr" layoutX="127.0" layoutY="10.0" prefHeight="21.0" prefWidth="25.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
             <Label layoutX="123.0" layoutY="12.0" text="(" />
-            <Label layoutX="141.0" layoutY="12.0" text=")" />
+            <Label layoutX="148.0" layoutY="12.0" prefHeight="21.0" prefWidth="33.0" text=")" />
          </children>
       </Pane>
       <JFXTextField fx:id="txt_loyer" layoutX="399.0" layoutY="195.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />

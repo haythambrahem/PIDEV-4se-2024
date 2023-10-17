@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.Period;
 
 import java.util.List;
@@ -29,6 +30,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,7 +41,7 @@ import services.ServiceLocataire;
 import services.ServiceLocation;
 import services.ServiceLogement;
 import tools.MyDB;
-
+import javafx.util.converter.IntegerStringConverter;
 /**
  * FXML Controller class
  *
@@ -121,20 +123,66 @@ private ServiceLocataire serviceLocataire;
 //-----------------------------
 
 
- @FXML
-    private void addLocation(MouseEvent event) {
-     String cin = txt_CIN.getText();
+
+//     String cin = txt_CIN.getText();
+//    String adr = txt_adr.getText();
+//
+//    Locataire locataire = serviceLocataire.rechercherLocataireParCIN(cin);
+//    List<Logement> logements = serviceLogement.rechercheLogement(adr);
+//    Logement logement = null;
+//
+//    if (logements.size() > 0) {
+//        logement = logements.get(0);
+//    }
+//
+//    if (locataire != null && logement != null) {
+//        LocalDate dateDebutValue = dateDebut.getValue();
+//        LocalDate dateFinValue = dateFin.getValue();
+//
+//        if (dateDebutValue != null && dateFinValue != null) {
+//            java.sql.Date dateDebut = java.sql.Date.valueOf(dateDebutValue);
+//            java.sql.Date dateFin = java.sql.Date.valueOf(dateFinValue);
+//
+//            ServiceLocation serviceLocation = new ServiceLocation();
+//
+//            if (!serviceLocation.isLocationAvailable(logement.getId(), dateDebut, dateFin)) {
+//                // Show an alert that location is not available
+//            } else {
+//                Location location = new Location();
+//                location.setLogement(logement);
+//                location.setLocataire(locataire);
+//                location.setDateDebut(dateDebut);
+//                location.setDateFin(dateFin);
+//
+//                if (serviceLocation.ajouterLocation(location)) {
+//                    Alert alert = new Alert(AlertType.INFORMATION);
+//                    alert.setTitle("Succès");
+//                    alert.setHeaderText(null);
+//                    alert.setContentText("Location ajoutée avec succès.");
+//                    alert.showAndWait();
+//                } else {
+//                    Alert alert = new Alert(AlertType.ERROR);
+//                    alert.setTitle("Erreur");
+//                    alert.setHeaderText(null);
+//                    alert.setContentText("Impossible d'ajouter la location.");
+//                    alert.showAndWait();
+//                }
+//            }
+//        } else {
+//            // Handle the case where the DatePicker values are null
+//        }
+//    } else {
+//        // Handle the case where locataire or logement is not found
+//    }
+  @FXML
+    private void addLocation(MouseEvent event) throws SQLException {
+    String cin = txt_CIN.getText();
     String adr = txt_adr.getText();
+        textField.setTextFormatter(textFormatter);
+    int locataireId = serviceLocataire.retrieveLocataireIdByCIN(cin);
+    int logementId = serviceLogement.retrieveLogementIdByAdr(adr);
 
-    Locataire locataire = serviceLocataire.rechercherLocataireParCIN(cin);
-    List<Logement> logements = serviceLogement.rechercheLogement(adr);
-    Logement logement = null;
-
-    if (logements.size() > 0) {
-        logement = logements.get(0);
-    }
-
-    if (locataire != null && logement != null) {
+    if (locataireId != 0 && logementId != 0) {
         LocalDate dateDebutValue = dateDebut.getValue();
         LocalDate dateFinValue = dateFin.getValue();
 
@@ -144,14 +192,23 @@ private ServiceLocataire serviceLocataire;
 
             ServiceLocation serviceLocation = new ServiceLocation();
 
-            if (!serviceLocation.isLocationAvailable(logement.getId(), dateDebut, dateFin)) {
-                // Show an alert that location is not available
+            if (!serviceLocation.isLocationAvailable(logementId, dateDebut, dateFin)) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("La location n'est pas disponible pour les dates sélectionnées.");
+                alert.showAndWait();
             } else {
+                 int loyer = serviceLogement.getLogementById(logementId).getLoyer();
+                int days =Integer.parseInt(txt_periode.getText()); // Calculate the number of days (e.g., from txt_periode)
+                int tarif = days * loyer;
                 Location location = new Location();
-                location.setLogement(logement);
-                location.setLocataire(locataire);
+                location.setLogement(serviceLogement.getLogementById(logementId));
+                location.setLocataire(serviceLocataire.getLocataireById(locataireId));
                 location.setDateDebut(dateDebut);
                 location.setDateFin(dateFin);
+               
+                location.setTarif(tarif); // You should set the tarif here.
 
                 if (serviceLocation.ajouterLocation(location)) {
                     Alert alert = new Alert(AlertType.INFORMATION);
@@ -159,6 +216,9 @@ private ServiceLocataire serviceLocataire;
                     alert.setHeaderText(null);
                     alert.setContentText("Location ajoutée avec succès.");
                     alert.showAndWait();
+                   clearInputFields();
+               //   dateDebut.setValue(null);
+               //     dateFin.setValue(null);
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Erreur");
@@ -168,12 +228,21 @@ private ServiceLocataire serviceLocataire;
                 }
             }
         } else {
-            // Handle the case where the DatePicker values are null
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner des dates valides.");
+            alert.showAndWait();
         }
     } else {
-        // Handle the case where locataire or logement is not found
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText("Locataire ou logement non trouvé.");
+        alert.showAndWait();
     }
 }
+
 private Logement searchLogement(String adr) {
     List<Logement> logements = serviceLogement.rechercheLogement(adr);
 
@@ -207,6 +276,7 @@ private void showAlert(AlertType type, String title, String content) {
         txt_cinSearch.clear();
         txt_nomPrenom.clear();
         txt_tele.clear();
+        txt_periode.clear();
         dateDebut.setValue(null);
         dateFin.setValue(null);
         imageLog.setImage(null);
@@ -262,42 +332,63 @@ if (startDate != null && endDate != null) {
 
     @FXML
     private void searchLogement(ActionEvent event) {
-           if (txt_searchLogementid != null) {
-             
-    String critere = txt_searchLogementid .getText(); 
-         System.out.println(critere);
-     ServiceLogement serviceLogement = new ServiceLogement(); // Créez une instance de ServiceLogement
-List<Logement> resultat = serviceLogement.rechercheLogement(critere); // Appelez la méthode sur l'instance
+        if (txt_searchLogementid != null) {
+        String critere = txt_searchLogementid.getText().trim(); // Trim the input to remove leading/trailing whitespace
+        System.out.println(critere);
 
-resultat.forEach(logement -> {
-    txt_adr.setText(logement.getAdr());
-   // txt_superfice.setText(String.valueOf(logement.getSuperfice()));
-    txt_loyer.setText(String.valueOf(logement.getLoyer()));
-    txt_region.setText(logement.getRegion());
-   txt_type.setText(logement.getType().toString());
-    
-            System.out.println(logement.getImage());
+        if (critere.isEmpty()) {
+            // Show an error alert if the input is empty
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Le champ de recherche est vide.");
+            alert.showAndWait();
+        } else {
+            ServiceLogement serviceLogement = new ServiceLogement();
+            List<Logement> resultat = serviceLogement.rechercheLogement(critere);
 
-    // Vérifiez si le chemin du fichier image n'est pas vide avant de créer l'objet Image
-    if (logement.getImage() != null && !logement.getImage().isEmpty()) {
-        String fileUrl = new File(logement.getImage()).toURI().toString();
-        System.out.println(fileUrl);
-        Image image = new Image(fileUrl);
-        imageLog.setImage(image);
+            if (resultat.isEmpty()) {
+                // Show an information alert if no results are found
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText(null);
+                alert.setContentText("Aucun résultat trouvé pour le critère de recherche.");
+                alert.showAndWait();
+            } else {
+                resultat.forEach(logement -> {
+                    txt_adr.setText(logement.getAdr());
+                    // txt_superfice.setText(String.valueOf(logement.getSuperfice()));
+                    txt_loyer.setText(String.valueOf(logement.getLoyer()));
+                    txt_region.setText(logement.getRegion());
+                    txt_type.setText(logement.getType().toString());
+
+                    System.out.println(logement.getImage());
+
+                    if (logement.getImage() != null && !logement.getImage().isEmpty()) {
+                        String fileUrl = new File(logement.getImage()).toURI().toString();
+                        System.out.println(fileUrl);
+                        Image image = new Image(fileUrl);
+                        imageLog.setImage(image);
+                    } else {
+                        // Handle the case where the image path is empty or null (e.g., display a default image)
+                    }
+                });
+
+                // Create an ObservableList from the list of results
+              //  ObservableList<Logement> observableResultat = FXCollections.observableArrayList(resultat);
+                // Set the ListView with the new ObservableList
+             //   listView_logement.setItems(observableResultat);
+            }
+        }
     } else {
-        // Gérez le cas où le chemin du fichier image est vide ou null
-        // Peut-être afficher une image par défaut
+        // Show an error alert if txt_searchLogementid is null (empty)
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText("Le champ de recherche est vide.");
+        alert.showAndWait();
     }
-});
-    // Créez une ObservableList à partir de la liste de résultats
-    ObservableList<Logement> observableResultat = FXCollections.observableArrayList(resultat);
-    // Configurez votre ListView avec la nouvelle ObservableList
-  //  listView_logement.setItems(observableResultat);
-       } else {
-        // Gérez la situation où txt_searchid est null
-        System.out.println("txt_searchid est null");
-    }
-    }
+}
 
     @FXML
     private void searchLocataire(ActionEvent event) {
@@ -314,5 +405,27 @@ resultat.forEach(logement -> {
         alert.showAndWait();
     }
 }
+    TextField textField = new TextField();
+
+// Créez un TextFormatter avec un filtre et un validateur
+TextFormatter<Integer> textFormatter = new TextFormatter<>(new IntegerStringConverter(), null, change -> {
+    String newText = change.getControlNewText();
+
+    if (newText.matches("\\d*")) {
+        // Permet seulement les caractères numériques
+        return change;
+    } else {
+        // Affiche une erreur si un caractère non numérique est entré
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur de saisie");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez entrer uniquement des chiffres.");
+        alert.showAndWait();
+        return null;
+    }
+});
+
+// Appliquez le TextFormatter au TextField
+
     }
 

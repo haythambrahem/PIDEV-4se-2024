@@ -38,21 +38,21 @@ public class ServiceLocation {
     
     
     
-     public boolean ajouterLocation(Location location)  {
-        try {
-            String sql = "INSERT INTO location (logement, locataire, dateDebut, dateFin, tarif) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement insertStatement = con.prepareStatement(sql);
-            insertStatement.setInt(1, location.getLogement().getId());
-            insertStatement.setInt(2, location.getLocataire().getId());
-            insertStatement.setDate(3, location.getDateDebut());
-            insertStatement.setDate(4, location.getDateFin());
-            insertStatement.setInt(5, location.getTarif());
-            return insertStatement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean ajouterLocation(Location location) {
+    String sql = "INSERT INTO location (logement, locataire, dateDebut, dateFin, tarif) VALUES (?, ?, ?, ?, ?)";
+    try (PreparedStatement insertStatement = con.prepareStatement(sql)) {
+        insertStatement.setInt(1, location.getLogement().getId());
+        insertStatement.setInt(2, location.getLocataire().getId());
+        insertStatement.setDate(3, location.getDateDebut());
+        insertStatement.setDate(4, location.getDateFin());
+        insertStatement.setInt(5, location.getTarif());
+        
+        return insertStatement.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
     }
+}
 
     // Opération Read (récupérer une réservation par son ID)
     public Location getLocationById(int id) {
@@ -148,25 +148,27 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
 }
     
    public boolean isLocationAvailable(int logementId, Date dateDebut, Date dateFin) {
-    // Query the database to check for existing locations that overlap with the specified date range
-    String sql = "SELECT COUNT(*) FROM location WHERE logement = ? AND ((dateDebut <= ? AND dateFin >= ?) OR (dateDebut <= ? AND dateFin >= ?))";
-    try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-        preparedStatement.setInt(1, logementId);
-        preparedStatement.setDate(2, (java.sql.Date) dateDebut);
-        preparedStatement.setDate(3, (java.sql.Date) dateDebut);
-        preparedStatement.setDate(4, (java.sql.Date) dateFin);
-        preparedStatement.setDate(5, (java.sql.Date) dateFin);
-        
-        ResultSet resultSet = preparedStatement.executeQuery();
+     try {
+        // Query the database to check for overlapping bookings
+        String sql = "SELECT idLocation FROM location " +
+                     "WHERE logement = ? " +
+                     "AND ((dateDebut <= ? AND dateFin >= ?) " +
+                     "OR (dateDebut <= ? AND dateFin >= ?))";
 
-        if (resultSet.next()) {
-            int count = resultSet.getInt(1);
-            return count == 0; // If count is 0, the location is available
-        }
+        PreparedStatement checkStatement = con.prepareStatement(sql);
+        checkStatement.setInt(1, logementId);
+        checkStatement.setDate(2, (java.sql.Date) dateDebut);
+        checkStatement.setDate(3, (java.sql.Date) dateDebut);
+        checkStatement.setDate(4, (java.sql.Date) dateFin);
+        checkStatement.setDate(5, (java.sql.Date) dateFin);
+
+        ResultSet resultSet = checkStatement.executeQuery();
+
+        // If the query returns any results, it means the location is not available
+        return !resultSet.next();
     } catch (SQLException e) {
         e.printStackTrace();
+        return false;
     }
-
-    return false; // An error occurred or no availability information was found
 }
 }
