@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="683.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.AfficherEventController">
+    <stylesheets>
+        <URL value="@afficherevent.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="411.0" fitWidth="683.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@navy-blue-background.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="39.0" layoutY="41.0" prefHeight="325.0" prefWidth="605.0" style="-fx-background-color: white;">
+         <children>
+            <TextField fx:id="titre_af" layoutX="111.0" layoutY="30.0" style="-fx-background-color: pink;" />
+            <Label alignment="CENTER" layoutX="32.0" layoutY="30.0" prefHeight="26.0" prefWidth="78.0" text="Titre :">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="271.0" layoutY="30.0" prefHeight="26.0" prefWidth="142.0" text="Nom de l'organisateur :">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nomorg_af" layoutX="433.0" layoutY="30.0" style="-fx-background-color: pink;" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="78.0" prefHeight="26.0" prefWidth="102.0" text="Heure début :">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hd_af" layoutX="111.0" layoutY="79.0" style="-fx-background-color: pink;" />
+            <Label alignment="CENTER" layoutX="342.0" layoutY="78.0" prefHeight="26.0" prefWidth="78.0" text="Heure fin : ">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hf_af" layoutX="433.0" layoutY="78.0" style="-fx-background-color: pink;" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="123.0" prefHeight="26.0" prefWidth="102.0" text="Adresse :">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="adresse_af" layoutX="111.0" layoutY="124.0" style="-fx-background-color: pink;" />
+            <Label alignment="CENTER" layoutX="342.0" layoutY="123.0" prefHeight="26.0" prefWidth="102.0" text="Type :">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="type_af" layoutX="433.0" layoutY="124.0" prefWidth="150.0" style="-fx-opacity: 0.5; -fx-background-color: green;" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="163.0" prefHeight="26.0" prefWidth="102.0" text="Description :">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="desc_af" layoutX="111.0" layoutY="163.0" prefHeight="58.0" prefWidth="150.0" />
+            <ListView fx:id="liste_af" layoutX="16.0" layoutY="233.0" prefHeight="104.0" prefWidth="570.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
