@@ -24,7 +24,7 @@ public class PIdev extends Application {
     @Override
    
        public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(ClassLoaderFXML.class.getResource("/interfaces/Logement.fxml"));
+        Parent root = FXMLLoader.load(ClassLoaderFXML.class.getResource("/interfaces/Accueil.fxml"));
 
         Scene scene = new Scene(root);
 

@@ -14,13 +14,13 @@ import java.sql.Date;
 public class Location {
      private int id;
     private Logement logement;
-    private Locataire locataire;
+    private Personne personne;
 
     private Date dateDebut;
     private Date dateFin;
     private int tarif;
 
-    public Location(int id, Logement logement, Locataire locataire, java.util.Date dateDebut, java.util.Date dateFin, int tarif) {
+    public Location(int id, Logement logement, Personne personne, java.util.Date dateDebut, java.util.Date dateFin, int tarif) {
     }
 public Logement getLogement() {
         return logement;
@@ -30,12 +30,12 @@ public Logement getLogement() {
         this.logement = logement;
     }
 
-    public Locataire getLocataire() {
-        return locataire;
+    public Personne getPersonne() {
+        return personne;
     }
 
-    public void setLocataire(Locataire locataire) {
-        this.locataire = locataire;
+    public void setPersonne(Personne personne) {
+        this.personne = personne;
     }
     public int getId() {
         return id;
@@ -75,10 +75,10 @@ public Logement getLogement() {
     public Location() {
     }
 
-    public Location(int id, Logement logement, Locataire locataire, Date dateDebut, Date dateFin, int tarif) {
+    public Location(int id, Logement logement, Personne personne, Date dateDebut, Date dateFin, int tarif) {
         this.id = id;
         this.logement = logement;
-        this.locataire = locataire;
+        this.personne = personne;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.tarif = tarif;
@@ -86,7 +86,7 @@ public Logement getLogement() {
 
     @Override
     public String toString() {
-        return "Location{" + "id=" + id + ", logement=" + logement + ", locataire=" + locataire + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", tarif=" + tarif + '}';
+        return "Location{" + "id=" + id + ", logement=" + logement + ", personne=" + personne + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", tarif=" + tarif + '}';
     }
 
    

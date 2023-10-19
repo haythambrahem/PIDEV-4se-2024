@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import models.Locataire;
+import models.Personne;
 import models.Location;
 import models.Logement;
 import tools.MyDB;
@@ -40,10 +40,10 @@ public class ServiceLocation {
     
     
     public boolean ajouterLocation(Location location) {
-    String sql = "INSERT INTO location (logement, locataire, dateDebut, dateFin, tarif) VALUES (?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO location (logement, personne, dateDebut, dateFin, tarif) VALUES (?, ?, ?, ?, ?)";
     try (PreparedStatement insertStatement = con.prepareStatement(sql)) {
         insertStatement.setInt(1, location.getLogement().getId());
-        insertStatement.setInt(2, location.getLocataire().getId());
+        insertStatement.setInt(2, location.getPersonne().getId());
         insertStatement.setDate(3, location.getDateDebut());
         insertStatement.setDate(4, location.getDateFin());
         insertStatement.setInt(5, location.getTarif());
@@ -55,7 +55,6 @@ public class ServiceLocation {
     }
 }
 
-    // Opération Read (récupérer une réservation par son ID)
     public Location getLocationById(int id) {
         Location location = null;
         try {
@@ -66,16 +65,16 @@ public class ServiceLocation {
 
             if (resultSet.next()) {
                 int idLogement = resultSet.getInt("logement");
-                int idLocataire = resultSet.getInt("locataire");
+                int idPersonne = resultSet.getInt("personne");
                 Date dateDebut = resultSet.getDate("dateDebut");
                 Date dateFin = resultSet.getDate("dateFin");
                 int tarif = resultSet.getInt("tarif");
   ServiceLogement serviceLogement = new ServiceLogement();
-            ServiceLocataire serviceLocataire = new ServiceLocataire();
+            ServicePersonne servicePersonne = new ServicePersonne();
             Logement logement = serviceLogement.getLogementById(idLogement);
-            Locataire locataire = serviceLocataire.getLocataireById(idLocataire);
+            Personne personne = servicePersonne.getPersonneById(idPersonne);
                 // Vous devrez récupérer le Logement et le Locataire correspondant à partir de leur ID ici
-                location = new Location(id, logement, locataire, dateDebut, dateFin, tarif);
+                location = new Location(id, logement, personne, dateDebut, dateFin, tarif);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,17 +82,16 @@ public class ServiceLocation {
         return location;
     }
 
-    // Opération Update (mettre à jour une réservation existante)
     public void modifierLocation(Location location) throws SQLException {
         ServiceLogement serviceLogement = new ServiceLogement();
-ServiceLocataire serviceLocataire = new ServiceLocataire();
+ServicePersonne servicePersonne = new ServicePersonne();
          Logement logement = serviceLogement.getLogementById(location.getLogement().getId());
-Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().getId());
+Personne personne = servicePersonne.getPersonneById(location.getPersonne().getId());
         try {
-            String sql = "UPDATE location SET logement = ?, locataire = ?, dateDebut = ?, dateFin = ?, tarif = ? WHERE idLocation = ?";
+            String sql = "UPDATE location SET logement = ?, personne = ?, dateDebut = ?, dateFin = ?, tarif = ? WHERE idLocation = ?";
             PreparedStatement updateStatement = con.prepareStatement(sql);
             updateStatement.setInt(1, location.getLogement().getId());
-            updateStatement.setInt(2, location.getLocataire().getId());
+            updateStatement.setInt(2, location.getPersonne().getId());
             updateStatement.setDate(3, new java.sql.Date(location.getDateDebut().getTime()));
             updateStatement.setDate(4, new java.sql.Date(location.getDateFin().getTime()));
             updateStatement.setInt(5, location.getTarif());
@@ -104,7 +102,6 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
         }
     }
 
-    // Opération Delete (supprimer une réservation existante)
     public void supprimerLocation(int id) {
         try {
             String sql = "DELETE FROM location WHERE idLocation = ?";
@@ -116,11 +113,10 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
         }
     }
 
-    // Opération Read (récupérer toutes les réservations)
     public List<Location> getAllLocations() {
          List<Location> locations = new ArrayList<>();
     ServiceLogement serviceLogement = new ServiceLogement();
-    ServiceLocataire serviceLocataire = new ServiceLocataire();
+    ServicePersonne servicePersonne = new ServicePersonne();
     
     try {
         String sql = "SELECT * FROM location";
@@ -130,16 +126,15 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
         while (resultSet.next()) {
             int id = resultSet.getInt("idLocation");
             int idLogement = resultSet.getInt("Logement");
-            int idLocataire = resultSet.getInt("locataire");
+            int idPersonne = resultSet.getInt("personne");
             Date dateDebut = resultSet.getDate("dateDebut");
             Date dateFin = resultSet.getDate("dateFin");
             int tarif = resultSet.getInt("tarif");
 
-            // Vous devrez récupérer le Logement et le Locataire correspondant à partir de leur ID ici
             Logement logement = serviceLogement.getLogementById(idLogement);
-            Locataire locataire = serviceLocataire.getLocataireById(idLocataire);
+            Personne personne = servicePersonne.getPersonneById(idPersonne);
 
-            Location location = new Location(id, logement, locataire, dateDebut, dateFin, tarif);
+            Location location = new Location(id, logement, personne, dateDebut, dateFin, tarif);
             locations.add(location);
         }
     } catch (SQLException e) {
@@ -150,7 +145,6 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
     
    public boolean isLocationAvailable(int logementId, Date dateDebut, Date dateFin) {
      try {
-        // Query the database to check for overlapping bookings
         String sql = "SELECT idLocation FROM location " +
                      "WHERE logement = ? " +
                      "AND ((dateDebut <= ? AND dateFin >= ?) " +
@@ -165,7 +159,6 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
 
         ResultSet resultSet = checkStatement.executeQuery();
 
-        // If the query returns any results, it means the location is not available
         return !resultSet.next();
     } catch (SQLException e) {
         e.printStackTrace();
@@ -185,28 +178,27 @@ Locataire locataire = serviceLocataire.getLocataireById(location.getLocataire().
             // Retrieve location details from the result set and create Location objects
             int id = resultSet.getInt("idLocation");
             int logementId = resultSet.getInt("logement");
-            int locataireId = resultSet.getInt("locataire");
+            int personneId = resultSet.getInt("personne");
             Date dateDebut = resultSet.getDate("dateDebut");
             Date dateFin = resultSet.getDate("dateFin");
             int tarif = resultSet.getInt("tarif");
 
             // Use the service classes to get Logement and Locataire objects by their IDs
             ServiceLogement serviceLogement = new ServiceLogement();
-            ServiceLocataire serviceLocataire = new ServiceLocataire();
+            ServicePersonne servicePersonne = new ServicePersonne();
 
             Logement logement = serviceLogement.getLogementById(logementId);
-            Locataire locataire = serviceLocataire.getLocataireById(locataireId);
+            Personne personne = servicePersonne.getPersonneById(personneId);
 
             // Create Location object and add it to the list
-            Location location = new Location(id, logement, locataire, dateDebut, dateFin, tarif);
+            Location location = new Location(id, logement, personne, dateDebut, dateFin, tarif);
             locations.add(location);
         }
 
         return locations;
     } catch (SQLException e) {
         e.printStackTrace();
-        // Handle the exceptions appropriately here
-        return Collections.emptyList(); // Return an empty list if an error occurs
+        return Collections.emptyList(); 
     }
 }
 }

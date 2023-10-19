@@ -33,7 +33,6 @@ public class ServiceShowLog {
      public int getAvailableLogementCount() {
         int count = 0;
         try {
-            // Perform a database query to get the count of available logements.
             String sql = "SELECT COUNT(*) FROM logement where idLogement not in (select logement from location)";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet result = st.executeQuery();
@@ -50,7 +49,6 @@ public class ServiceShowLog {
     public LogementDetails getAvailableLogementDetails() {
         LogementDetails details = new LogementDetails();
         try {
-            // Perform a database query to get logement details.
             String sql = "SELECT loyer, superfice, region, adrL FROM logement WHERE idLogement = 1";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet result = st.executeQuery();

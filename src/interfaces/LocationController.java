@@ -41,9 +41,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Locataire;
+import models.Personne;
 import models.Location;
 import models.Logement;
 import services.ServiceLocataire;
+import services.ServicePersonne;
 import services.ServiceLocation;
 import services.ServiceLogement;
 import tools.MyDB;
@@ -108,6 +110,7 @@ public class LocationController implements Initializable {
  
 private ServiceLogement serviceLogement;
 private ServiceLocataire serviceLocataire;
+private ServicePersonne servicePersonne;
 //----------------------------     
 
 
@@ -182,13 +185,13 @@ private ServiceLocataire serviceLocataire;
 //    }
   @FXML
     private void addLocation(MouseEvent event) throws SQLException {
-    String cin = txt_CIN.getText();
+    String email = txt_CIN.getText();
     String adr = txt_adr.getText();
         textField.setTextFormatter(textFormatter);
-    int locataireId = serviceLocataire.retrieveLocataireIdByCIN(cin);
+    int personneId = servicePersonne.retrievePersonneIdByEMAIL(email);
     int logementId = serviceLogement.retrieveLogementIdByAdr(adr);
 
-    if (locataireId != 0 && logementId != 0) {
+    if (personneId != 0 && logementId != 0) {
         LocalDate dateDebutValue = dateDebut.getValue();
         LocalDate dateFinValue = dateFin.getValue();
 
@@ -210,11 +213,11 @@ private ServiceLocataire serviceLocataire;
                 int tarif = days * loyer;
                 Location location = new Location();
                 location.setLogement(serviceLogement.getLogementById(logementId));
-                location.setLocataire(serviceLocataire.getLocataireById(locataireId));
+                location.setPersonne(servicePersonne.getPersonneById(personneId));
                 location.setDateDebut(dateDebut);
                 location.setDateFin(dateFin);
                
-                location.setTarif(tarif); // You should set the tarif here.
+                location.setTarif(tarif);
 
                 if (serviceLocation.ajouterLocation(location)) {
                     Alert alert = new Alert(AlertType.INFORMATION);
@@ -244,7 +247,7 @@ private ServiceLocataire serviceLocataire;
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
-        alert.setContentText("Locataire ou logement non trouvé.");
+        alert.setContentText("Client ou logement non trouvé.");
         alert.showAndWait();
     }
 }
@@ -260,8 +263,6 @@ private Logement searchLogement(String adr) {
 }
 
 private Date convertLocalDateToDate(LocalDate localDate) {
-    // Implement the conversion based on your date format
-    // For example: return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     return null;
 }
 
@@ -323,6 +324,7 @@ if (startDate != null && endDate != null) {
         con = MyDB.getinstance().getCon();
     serviceLocataire = new ServiceLocataire();
      serviceLogement = new ServiceLogement();
+     servicePersonne = new ServicePersonne();
     // serviceLocation = new ServiceLocation();
     } 
 
@@ -331,20 +333,16 @@ if (startDate != null && endDate != null) {
     @FXML
     private void logementPrecedent(MouseEvent event) {
          try {
-            // Load the new FXML file
+           
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Logement.fxml"));
             Parent root = loader.load();
 
-            // Create the new scene
             Scene newScene = new Scene(root);
 
-            // Get the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the new scene on the stage
             currentStage.setScene(newScene);
 
-            // Show the new scene
             currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -354,20 +352,15 @@ if (startDate != null && endDate != null) {
     @FXML
     private void logementSuivant(MouseEvent event) {
      try {
-            // Load the new FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Historique.fxml"));
             Parent root = loader.load();
 
-            // Create the new scene
             Scene newScene = new Scene(root);
 
-            // Get the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the new scene on the stage
             currentStage.setScene(newScene);
 
-            // Show the new scene
             currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -381,7 +374,6 @@ if (startDate != null && endDate != null) {
         System.out.println(critere);
 
         if (critere.isEmpty()) {
-            // Show an error alert if the input is empty
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
@@ -392,7 +384,6 @@ if (startDate != null && endDate != null) {
             List<Logement> resultat = serviceLogement.rechercheLogement(critere);
 
             if (resultat.isEmpty()) {
-                // Show an information alert if no results are found
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText(null);
@@ -414,18 +405,14 @@ if (startDate != null && endDate != null) {
                         Image image = new Image(fileUrl);
                         imageLog.setImage(image);
                     } else {
-                        // Handle the case where the image path is empty or null (e.g., display a default image)
                     }
                 });
 
-                // Create an ObservableList from the list of results
               //  ObservableList<Logement> observableResultat = FXCollections.observableArrayList(resultat);
-                // Set the ListView with the new ObservableList
              //   listView_logement.setItems(observableResultat);
             }
         }
     } else {
-        // Show an error alert if txt_searchLogementid is null (empty)
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
@@ -436,30 +423,27 @@ if (startDate != null && endDate != null) {
 
     @FXML
     private void searchLocataire(ActionEvent event) {
-         String cin = txt_cinSearch.getText();
-    Locataire locataire = serviceLocataire.rechercherLocataireParCIN(cin);
-    if (locataire != null) {
-        txt_CIN.setText(locataire.getCin());
-        txt_nomPrenom.setText(locataire.getNomprenom());
-        txt_tele.setText(locataire.getTele());
+         String email = txt_cinSearch.getText();
+    Personne personne = servicePersonne.rechercherPersonneParEmail(email);
+    if (personne != null) {
+        txt_CIN.setText(personne.getEmail());
+        txt_nomPrenom.setText(personne.getNom());
+        txt_tele.setText(personne.getPrenom());
         txt_cinSearch.setText("");
         System.out.println("Result found");
     } else {
-        Alert alert = new Alert(AlertType.ERROR, "Aucun locataire avec CIN=" + cin, ButtonType.OK);
+        Alert alert = new Alert(AlertType.ERROR, "Aucun locataire avec email=" + email, ButtonType.OK);
         alert.showAndWait();
     }
 }
     TextField textField = new TextField();
 
-// Créez un TextFormatter avec un filtre et un validateur
 TextFormatter<Integer> textFormatter = new TextFormatter<>(new IntegerStringConverter(), null, change -> {
     String newText = change.getControlNewText();
 
     if (newText.matches("\\d*")) {
-        // Permet seulement les caractères numériques
         return change;
     } else {
-        // Affiche une erreur si un caractère non numérique est entré
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Erreur de saisie");
         alert.setHeaderText(null);
@@ -469,7 +453,6 @@ TextFormatter<Integer> textFormatter = new TextFormatter<>(new IntegerStringConv
     }
 });
 
-// Appliquez le TextFormatter au TextField
 
     }
 

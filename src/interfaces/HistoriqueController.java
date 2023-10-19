@@ -80,7 +80,6 @@ Connection con;
       String critere = txt_search.getText().trim();
 
     if (critere.isEmpty()) {
-        // Show an error alert if the input is empty
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
@@ -91,14 +90,12 @@ Connection con;
         List<Location> searchResults = serviceLocation.searchLocationsByCriteria(critere);
 
         if (searchResults.isEmpty()) {
-            // Show an information alert if no results are found
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText(null);
             alert.setContentText("Aucun résultat trouvé pour le critère de recherche.");
             alert.showAndWait();
         } else {
-            // Populate the listview_historique with the search results
             listview_historique.getItems().setAll(searchResults);
         }
     }
@@ -109,7 +106,6 @@ Connection con;
         Location selectedLocation = listview_historique.getSelectionModel().getSelectedItem();
 
     if (selectedLocation != null) {
-        // Get the associated Logement
         Logement logement = selectedLocation.getLogement();
 
         // Populate the fields with Logement details

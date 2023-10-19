@@ -39,14 +39,13 @@ public class ServiceLogement implements LogService<Logement> {
 
 
     public ServiceLogement() {
-       con = MyDB.getinstance().getCon();//To change body of generated methods, choose Tools | Templates.
+       con = MyDB.getinstance().getCon();
     }
 
     @Override
     public void ajouterLogement(Logement t) {
      String sql = "INSERT INTO logement (adrL, superfice, loyer, type, region, image) VALUES (?, ?, ?, ?, ?, ?)";
         try {
-        // You can use PreparedStatement for better security against SQL injection
        
         PreparedStatement ps = con.prepareStatement(sql);
 String type = t.getType().toString();
@@ -57,17 +56,13 @@ String type = t.getType().toString();
         ps.setString(4, type);
         ps.setString(5, t.getRegion());
 
-        // Assuming that the image data is stored as a Blob
+    
         ps.setString(6, t.getImage());
-
-        // Execute the query
         ps.executeUpdate();
 
-        // Close the PreparedStatement
-     //   ps.close();
     } catch (SQLException ex) {
         System.out.println(ex);
-        // Handle the exception as needed
+        
     }
 }
 
@@ -91,7 +86,6 @@ public List<Logement> rechercheLogement(String critere) {
             logement.setRegion(resultSet.getString("region"));
             logement.setType(type.valueOf(resultSet.getString("type")));
             logement.setImage(resultSet.getString("image"));
-            // Autres attributs du logement
 
             logements.add(logement);
 
@@ -100,7 +94,6 @@ public List<Logement> rechercheLogement(String critere) {
         return logements;
     } catch (SQLException e) {
         e.printStackTrace();
-        // Gérez les exceptions appropriées ici
         return Collections.emptyList();
     }
 }
@@ -123,7 +116,7 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
             logement.setRegion(resultSet.getString("region"));
             logement.setType(type.valueOf(resultSet.getString("type")));
             logement.setImage(resultSet.getString("image"));
-            // Other logement attributes
+           
 
             logements.add(logement);
         }
@@ -131,7 +124,6 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
         return logements;
     } catch (SQLException e) {
         e.printStackTrace();
-        // Handle appropriate exceptions here
         return Collections.emptyList();
     }
 }
@@ -142,7 +134,6 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
          try {
         String sql = "UPDATE logement SET adrL=?, superfice=?, loyer=?, type=?, region=?, image=? WHERE idLogement=?" ;
 
-        // Use a PreparedStatement to avoid SQL injection
         PreparedStatement updateStatement ;
         String type = t.getType().toString();
         updateStatement = con.prepareStatement(sql);
@@ -152,22 +143,20 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
         updateStatement.setString(4, type);
         updateStatement.setString(5, t.getRegion());
 
-        // Handle updating Blob image data
+      
         
         updateStatement.setString(6,  t.getImage());
         updateStatement.setInt(7, t.getId());
 
-        // Use a WHERE clause to specify the record to update
+       
         updateStatement.executeUpdate();
 
-        // Handle exceptions as needed
         int rowsUpdated = updateStatement.executeUpdate();
         if (rowsUpdated > 0) {
             System.out.println("La modification de logement : " + t.getId() + " a été effectuée avec succès.");
         }
     } catch (SQLException e) {
         e.printStackTrace();
-        // Handle the exception appropriately, e.g., log or throw it
     }
     }
 
@@ -177,7 +166,6 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
     public List<Logement> affihcerLogement() {
         List<Logement> logements = new ArrayList<>();
 
-    // Écrivez une requête SQL SELECT pour récupérer les logements depuis la base de données
     String sql = "SELECT * FROM logement";
 
     try {
@@ -205,9 +193,7 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
         }
     } catch (SQLException ex) {
         System.out.println("An SQL exception occurred: " + ex.getMessage());
-        // Handle the exception further or rethrow it if necessary.
     } finally {
-        // Close the ResultSet, Statement, and handle any exceptions here.
     }
 
     return logements;
@@ -227,18 +213,13 @@ public List<Logement> rechercheLogement2(String adrCritere, String regionCritere
                 logement.setAdr(resultSet.getString("adr"));
                 logement.setSuperfice(resultSet.getInt("superfice"));
                 logement.setLoyer(resultSet.getInt("loyer"));
-// Assuming you have a ResultSet object named resultSet
 
-// Retrieve the string representation of type from the result set
 String typeString = resultSet.getString("type");
 logement.setType(type.valueOf(typeString));
 
-// Set the enum value to the Logement object
 
-                //logement.setType(resultSet.getString("type"));
                 logement.setRegion(resultSet.getString("region"));
                 // Handle Blob image data
-                // logement.setImage(resultSet.getBlob("image"));
 
                 logements.add(logement);
             }
@@ -306,7 +287,7 @@ logement.setType(type.valueOf(typeString));
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return 0; // Return 0 if no matching logement is found.
+    return 0;
 }
    
    

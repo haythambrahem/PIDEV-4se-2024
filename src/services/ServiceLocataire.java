@@ -32,24 +32,7 @@ public class ServiceLocataire {
        con = MyDB.getinstance().getCon();//To change body of generated methods, choose Tools | Templates.
     }
     
-     public Locataire rechercherLocataireParCIN(String cin) {
-      String sql = "SELECT nomprenomL, teleL, CIN FROM locataire WHERE CIN = ?";
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1, cin);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                Locataire locataire = new Locataire();
-                locataire.setCin(resultSet.getString("CIN"));
-                locataire.setNomprenom(resultSet.getString("nomprenomL"));
-                locataire.setTele(resultSet.getString("teleL"));
-                return locataire;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
+   
      
     public Locataire getLocataireById(int id) throws SQLException {
     String selectQuery = "SELECT * FROM locataire WHERE idL = ?";
@@ -88,4 +71,22 @@ public class ServiceLocataire {
     }
     return 0; // Return 0 if no matching locataire is found.
 }
+      public Locataire rechercherLocataireParCIN(String cin) {
+      String sql = "SELECT nomprenomL, teleL, CIN FROM locataire WHERE CIN = ?";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, cin);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Locataire locataire = new Locataire();
+                locataire.setCin(resultSet.getString("CIN"));
+                locataire.setNomprenom(resultSet.getString("nomprenomL"));
+                locataire.setTele(resultSet.getString("teleL"));
+                return locataire;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

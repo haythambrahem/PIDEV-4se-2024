@@ -153,7 +153,6 @@ public void showLogement(){
         txt_superfice.setText(Integer.toString(details.getSuperfice()));
         txt_region.setText(details.getRegion());
         txt_adr.setText(details.getAdrL());
-        // You should set the image if your UI allows image display.
         // imageLog.setImage(details.getImage());
         
     
@@ -186,20 +185,15 @@ public void showLogement(){
         ServiceLogement ps = new ServiceLogement();
      
        try {
-            // Load the new FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Location.fxml"));
             Parent root = loader.load();
 
-            // Create the new scene
             Scene newScene = new Scene(root);
 
-            // Get the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the new scene on the stage
             currentStage.setScene(newScene);
 
-            // Show the new scene
             currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
