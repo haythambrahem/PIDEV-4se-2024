@@ -275,7 +275,7 @@ private void showAlert(AlertType type, String title, String content) {
 }
 
         private void clearInputFields() {
-     txt_CIN.clear();
+            txt_CIN.clear();
         txt_adr.clear();
         txt_loyer.clear();
         txt_type.clear();

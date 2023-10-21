@@ -15,11 +15,14 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +48,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import models.Locataire;
 import models.Logement;
 import models.type;
 import services.ServiceLogement;
@@ -92,6 +96,7 @@ private ComboBox<String> cbLogementType;
     private Button LogAccueil;
     @FXML
     private Button refreshButton;
+    public ObservableList<Logement> data = FXCollections.observableArrayList();
 
  
     /**
@@ -108,7 +113,7 @@ ServiceLogement serviceLogement = new ServiceLogement();
         List<Logement> logements = serviceLogement.affihcerLogement();
 ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
 listView_logement.setItems(logementList);
- 
+ //LogementList= LogementListData();
         
     }    
 
@@ -467,8 +472,30 @@ File image = new File(lab_url.getText());
     ObservableList<Logement> logementList = FXCollections.observableArrayList(logements);
     listView_logement.setItems(logementList);
     }
+ private ObservableList<Logement> LogementList;
+ 
+   @FXML
+    private void searchLogementD(KeyEvent event) {
+    if (LogementList != null) {
+        FilteredList<Logement> filteredData = new FilteredList<>(LogementList, logement -> true);
 
+        txt_searchid.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(logement -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String searchKey = newValue.toLowerCase();
+
+                // Modify this condition to match the attribute you want to filter by
+                return logement.getAdr().toLowerCase().contains(searchKey);
+            });
+        });
+
+        // Apply sorting to the filtered data
+        listView_logement.setItems(FXCollections.observableArrayList(filteredData));
     }
-    
+}
 
+}
 

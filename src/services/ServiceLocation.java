@@ -114,27 +114,30 @@ Personne personne = servicePersonne.getPersonneById(location.getPersonne().getId
     }
 
     public List<Location> getAllLocations() {
-         List<Location> locations = new ArrayList<>();
-    ServiceLogement serviceLogement = new ServiceLogement();
-    ServicePersonne servicePersonne = new ServicePersonne();
-    
+       List<Location> locations = new ArrayList<>();
+
     try {
-        String sql = "SELECT * FROM location";
+        String sql = "SELECT l.idLocation, l.logement, l.personne, l.dateDebut, l.dateFin, l.tarif, lg.adrL,lg.region, p.email, p.nom, p.prenom " +
+                     "FROM location l " +
+                     "JOIN logement lg ON l.logement = lg.idLogement " +
+                     "JOIN personne p ON l.personne = p.id";
+
         PreparedStatement selectAllStatement = con.prepareStatement(sql);
         ResultSet resultSet = selectAllStatement.executeQuery();
 
         while (resultSet.next()) {
             int id = resultSet.getInt("idLocation");
-            int idLogement = resultSet.getInt("Logement");
-            int idPersonne = resultSet.getInt("personne");
+            String adr = resultSet.getString("adrL");
+             String region = resultSet.getString("region");
+            String email = resultSet.getString("email");
+            String nom = resultSet.getString("nom");
+            String prenom = resultSet.getString("prenom");
             Date dateDebut = resultSet.getDate("dateDebut");
             Date dateFin = resultSet.getDate("dateFin");
             int tarif = resultSet.getInt("tarif");
 
-            Logement logement = serviceLogement.getLogementById(idLogement);
-            Personne personne = servicePersonne.getPersonneById(idPersonne);
-
-            Location location = new Location(id, logement, personne, dateDebut, dateFin, tarif);
+            // Create Location object and add it to the list
+            Location location = new Location(id, adr,region, email,nom,prenom, dateDebut, dateFin, tarif);
             locations.add(location);
         }
     } catch (SQLException e) {
@@ -165,40 +168,74 @@ Personne personne = servicePersonne.getPersonneById(location.getPersonne().getId
         return false;
     }
 }
-   public List<Location> searchLocationsByCriteria(String critere) {
-      String selectQuery = "SELECT * FROM location WHERE logement LIKE ?";
+  public List<Location> searchLocationsByCriteria(String criteria) {
+    List<Location> searchResults = new ArrayList<>();
+    try {
+        String sql = "SELECT l.idLocation, l.logement, l.personne, l.dateDebut, l.dateFin, l.tarif, lg.adrL, lg.region, p.email, p.nom, p.prenom " +
+                     "FROM location l " +
+                     "JOIN logement lg ON l.logement = lg.idLogement " +
+                     "JOIN personne p ON l.personne = p.id " +
+                     "WHERE  lg.adrL LIKE ? OR lg.region LIKE ? OR p.email = ? OR p.nom = ? OR p.prenom = ?";
+        PreparedStatement searchStatement = con.prepareStatement(sql);
+        searchStatement.setString(1,  "%" + criteria + "%");
+        searchStatement.setString(2, "%" + criteria + "%");
+        searchStatement.setString(3, criteria);
+        searchStatement.setString(4, criteria);
+        searchStatement.setString(5, criteria);
+      //  searchStatement.setString(6, criteria);
 
-    try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
-        preparedStatement.setString(1, "%" + critere + "%"); // Utilize % for partial search
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<Location> locations = new ArrayList<>();
+        ResultSet resultSet = searchStatement.executeQuery();
 
         while (resultSet.next()) {
-            // Retrieve location details from the result set and create Location objects
             int id = resultSet.getInt("idLocation");
-            int logementId = resultSet.getInt("logement");
-            int personneId = resultSet.getInt("personne");
+            String adr = resultSet.getString("adrL");
+            String region = resultSet.getString("region");
+            String email = resultSet.getString("email");
+            String nom = resultSet.getString("nom");
+            String prenom = resultSet.getString("prenom");
             Date dateDebut = resultSet.getDate("dateDebut");
             Date dateFin = resultSet.getDate("dateFin");
             int tarif = resultSet.getInt("tarif");
 
-            // Use the service classes to get Logement and Locataire objects by their IDs
-            ServiceLogement serviceLogement = new ServiceLogement();
-            ServicePersonne servicePersonne = new ServicePersonne();
-
-            Logement logement = serviceLogement.getLogementById(logementId);
-            Personne personne = servicePersonne.getPersonneById(personneId);
-
-            // Create Location object and add it to the list
-            Location location = new Location(id, logement, personne, dateDebut, dateFin, tarif);
-            locations.add(location);
+            Location location = new Location(id, adr, region, email, nom, prenom, dateDebut, dateFin, tarif);
+            searchResults.add(location);
         }
-
-        return locations;
     } catch (SQLException e) {
         e.printStackTrace();
-        return Collections.emptyList(); 
     }
+    return searchResults;
 }
+   public List<Location> searchLocationsByEmail(String criteria) {
+    List<Location> searchResults = new ArrayList<>();
+    try {
+        String sql = "SELECT l.idLocation, l.logement, l.personne, l.dateDebut, l.dateFin, l.tarif, lg.adrL, lg.region, p.email, p.nom, p.prenom " +
+                     "FROM location l " +
+                     "JOIN logement lg ON l.logement = lg.idLogement " +
+                     "JOIN personne p ON l.personne = p.id " +
+                     "WHERE p.email = ?";
+        PreparedStatement searchStatement = con.prepareStatement(sql);
+        searchStatement.setString(1, criteria); // You don't need wildcards (%) for exact email match
+
+        ResultSet resultSet = searchStatement.executeQuery();
+
+        while (resultSet.next()) {
+            int id = resultSet.getInt("idLocation");
+            String adr = resultSet.getString("adrL");
+            String region = resultSet.getString("region");
+            String email = resultSet.getString("email");
+            String nom = resultSet.getString("nom");
+            String prenom = resultSet.getString("prenom");
+            Date dateDebut = resultSet.getDate("dateDebut");
+            Date dateFin = resultSet.getDate("dateFin");
+            int tarif = resultSet.getInt("tarif");
+
+            Location location = new Location(id, adr, region, email, nom, prenom, dateDebut, dateFin, tarif);
+            searchResults.add(location);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return searchResults;
+}
+   
 }

@@ -22,7 +22,7 @@ import java.util.Objects;
     private String adr;
     private int superfice;
     private int loyer;
-    private type type;
+    type type;
     private String region;
    private String image;
 
@@ -30,6 +30,13 @@ import java.util.Objects;
 
     // Default constructor
     public Logement() {
+    }
+
+    public Logement(int id, int superfice, int loyer, String region) {
+        this.id = id;
+        this.superfice = superfice;
+        this.loyer = loyer;
+        this.region = region;
     }
 
    
@@ -124,6 +131,14 @@ import java.util.Objects;
            Objects.equals(type, logement.type) &&
            Objects.equals(region, logement.region);
 }
+
+    public Logement(int id, String adr, int superfice, String region) {
+        this.id = id;
+        this.adr = adr;
+        this.superfice = superfice;
+        this.region = region;
+    }
+    
 @Override
 public String toString() {
     return " l'adresse est " + adr + 

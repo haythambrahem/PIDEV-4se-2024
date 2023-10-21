@@ -21,7 +21,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.activation.DataSource;
+import models.Locataire;
 import models.Logement;
 import models.type;
 import tools.MyDB;
@@ -34,7 +37,9 @@ public class ServiceLogement implements LogService<Logement> {
  private  Connection con ;
     Statement ste;
     private FileInputStream fs;
-
+  public ResultSet result;
+  //public PreparedStatement st;
+    public ObservableList<Logement> data = FXCollections.observableArrayList();
 
 
 
@@ -290,7 +295,33 @@ logement.setType(type.valueOf(typeString));
     return 0;
 }
    
-   
+   public ObservableList<Logement> LogementListData() {
+     ObservableList<Logement> listData = FXCollections.observableArrayList();
+    String sql = "SELECT * FROM logement";
+
+    try {
+        // Assuming that 'con' is your established database connection
+        ste = con.createStatement();
+        result = ste.executeQuery(sql);  // Pass the SQL string as an argument to executeQuery
+
+        while (result.next()) {
+            Logement logement = new Logement(
+                result.getInt("idLogement"),
+                    result.getString("adrL"),
+                result.getInt("superfice"),
+              //  result.getInt("loyer"),
+                result.getString("region")
+                    
+            );
+
+            listData.add(logement);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return listData;
+}
+
     }
     
     
