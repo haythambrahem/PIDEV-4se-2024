@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package tn.esprit.services;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,10 +24,10 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.activation.DataSource;
-import models.Locataire;
-import models.Logement;
-import models.type;
-import tools.MyDB;
+import tn.esprit.entity.Locataire;
+import tn.esprit.entity.Logement;
+import tn.esprit.entity.type;
+import tn.esprit.tools.MyDB;
 
 /**
  *

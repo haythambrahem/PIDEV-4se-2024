@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package tn.esprit.gui;
 
 import com.jfoenix.controls.JFXTextField;
 import java.io.ByteArrayInputStream;
@@ -29,9 +29,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import models.LogementDetails;
-import services.ServiceLogement;
-import services.ServiceShowLog;
+import tn.esprit.entity.LogementDetails;
+import tn.esprit.services.ServiceLogement;
+import tn.esprit.services.ServiceShowLog;
 //import projet.ConnexionMysql;
 
 /**

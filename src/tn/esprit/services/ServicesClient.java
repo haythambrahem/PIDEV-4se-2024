@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package tn.esprit.services;
 
-import services.IService;
-import tools.MyDB;
-import models.Client;
+import tn.esprit.services.IService;
+import tn.esprit.tools.MyDB;
+import tn.esprit.entity.Client;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Adresse;
-import models.Personne;
+import tn.esprit.entity.Adresse;
+import tn.esprit.entity.Personne;
 
 /**
  *

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package tn.esprit.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -42,11 +42,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import models.Locataire;
-import models.Location;
-import models.Logement;
-import services.ServiceLocation;
-import services.ServiceLogement;
+import tn.esprit.entity.Locataire;
+import tn.esprit.entity.Location;
+import tn.esprit.entity.Logement;
+import tn.esprit.services.ServiceLocation;
+import tn.esprit.services.ServiceLogement;
 
 /**
  * FXML Controller class

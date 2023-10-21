@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package tn.esprit.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -48,10 +48,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import models.Locataire;
-import models.Logement;
-import models.type;
-import services.ServiceLogement;
+import tn.esprit.entity.Locataire;
+import tn.esprit.entity.Logement;
+import tn.esprit.entity.type;
+import tn.esprit.services.ServiceLogement;
 
 /**
  * FXML Controller class

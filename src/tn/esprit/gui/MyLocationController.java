@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package tn.esprit.gui;
 
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -28,8 +28,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import models.Location;
-import services.ServiceLocation;
+import tn.esprit.entity.Location;
+import tn.esprit.services.ServiceLocation;
 
 /**
  * FXML Controller class

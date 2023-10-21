@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package tn.esprit.services;
+
+import java.util.List;
 
 /**
  *
  * @author FADI
  */
-public enum type {
-    maison,studio,appartement,hotel
-    
-    
+public interface LogService<T> {
+     void ajouterLogement(T t);
+    void supprimerLogement(T t);
+    void modifierLogement(T t);
+    List<T> affihcerLogement();
 }

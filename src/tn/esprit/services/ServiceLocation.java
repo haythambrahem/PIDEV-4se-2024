@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package tn.esprit.services;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import models.Personne;
-import models.Location;
-import models.Logement;
-import tools.MyDB;
+import tn.esprit.entity.Personne;
+import tn.esprit.entity.Location;
+import tn.esprit.entity.Logement;
+import tn.esprit.tools.MyDB;
 
 /**
  *

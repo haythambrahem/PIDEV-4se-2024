@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package tn.esprit.gui;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
@@ -40,15 +40,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import models.Locataire;
-import models.Personne;
-import models.Location;
-import models.Logement;
-import services.ServiceLocataire;
-import services.ServicePersonne;
-import services.ServiceLocation;
-import services.ServiceLogement;
-import tools.MyDB;
+import tn.esprit.entity.Locataire;
+import tn.esprit.entity.Personne;
+import tn.esprit.entity.Location;
+import tn.esprit.entity.Logement;
+import tn.esprit.services.ServiceLocataire;
+import tn.esprit.services.ServicePersonne;
+import tn.esprit.services.ServiceLocation;
+import tn.esprit.services.ServiceLogement;
+import tn.esprit.tools.MyDB;
 import javafx.util.converter.IntegerStringConverter;
 /**
  * FXML Controller class

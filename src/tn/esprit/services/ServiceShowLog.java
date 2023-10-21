@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package tn.esprit.services;
 
-import interfaces.AccueilController;
+import tn.esprit.gui.AccueilController;
 import java.io.FileInputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -13,8 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import models.LogementDetails;
-import tools.MyDB;
+import tn.esprit.entity.LogementDetails;
+import tn.esprit.tools.MyDB;
 
 /**
  *
