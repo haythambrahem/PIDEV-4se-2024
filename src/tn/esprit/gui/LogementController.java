@@ -447,23 +447,7 @@ File image = new File(lab_url.getText());
             e.printStackTrace();
         }
     }
-//    TextField textField = new TextField();
-//    TextFormatter<Integer> textFormatter = new TextFormatter<>(new IntegerStringConverter(), null, change -> {
-//    String newText = change.getControlNewText();
-//
-//    if (newText.matches("\\d*")) {
-//        // Permet seulement les caractères numériques
-//        return change;
-//    } else {
-//        // Affiche une erreur si un caractère non numérique est entré
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("Erreur de saisie");
-//        alert.setHeaderText(null);
-//        alert.setContentText("Veuillez entrer uniquement des chiffres.");
-//        alert.showAndWait();
-//        return null;
-//    }
-//});
+//  
 
     @FXML
     private void handleRefreshButton(ActionEvent event) {

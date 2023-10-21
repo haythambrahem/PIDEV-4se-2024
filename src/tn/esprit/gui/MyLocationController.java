@@ -5,13 +5,29 @@
  */
 package tn.esprit.gui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,6 +109,22 @@ public class MyLocationController implements Initializable {
 
     @FXML
     private void listMesLocation(MouseEvent event) {
+        Location selectedLocation = MesLocation.getSelectionModel().getSelectedItem();
+
+    if (selectedLocation != null) {
+        // Populate other fields based on the selected location, if needed
+        txt_adr.setText(selectedLocation.getLogement().getAdr());
+        txt_tarif.setText(String.valueOf(selectedLocation.getTarif()));
+      //  txt_region.setText(selectedLocation.getLogement().getRegion());
+       // txt_email.setText(selectedLocation.getPersonne().getEmail());
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Define your date format
+        String formattedDate = dateFormat.format(selectedLocation.getDateDebut()); // Format the Date
+        txt_dateD.setText(formattedDate); // Set the formatted date in the TextField
+        txt_nom.setText(selectedLocation.getPersonne().getNom());
+        String formattedDateF = dateFormat.format(selectedLocation.getDateFin()); // Format the Date
+        txt_dateF.setText(formattedDateF);
+         txt_prenom.setText(selectedLocation.getPersonne().getPrenom());
+    }
     }
 
     @FXML
@@ -121,9 +153,6 @@ public class MyLocationController implements Initializable {
     }
 }
 
-    @FXML
-    private void GetContrat(ActionEvent event) {
-    }
 
     @FXML
     private void move(ActionEvent event) {
@@ -144,4 +173,56 @@ public class MyLocationController implements Initializable {
         }
     }
     
+    @FXML
+    private void GetContrat(ActionEvent event) {
+    Document doc = new Document();
+    try {
+        PdfWriter.getInstance(doc, new FileOutputStream("contrat.pdf"));
+        doc.open();
+        
+        String format = "dd/MM/yy HH:mm"; // Correct date format
+        
+        SimpleDateFormat formater = new SimpleDateFormat(format);
+        Date date = new Date();
+        
+        com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance("C:\\Users\\111fa\\OneDrive\\Documents\\NetBeansProjects\\PIdev\\src\\tn\\esprit\\img\\entete2.JPG");
+        img.setAlignment(com.itextpdf.text.Image.ALIGN_CENTER);
+        doc.add(img);
+        doc.add(new Paragraph("Entre : FADI SAIDI"
+                + "\nDemeurant à : Tunis"
+                +"\nde Nationalité Tunisienne, CIN :07220722"
+                +"\nD'une part"
+                +"\nEt "+txt_nom.getText()+" "+txt_prenom.getText()+""
+                +"\nDemurent a : Tunis"
+                +"\nde Nationalité Tunisienne, CIN :XXXXX"
+                +"\nD'autre part"
+                +"\n\nIl a été convenu et arrété ce qui suit"
+                +"\nM.Fadi Saidi donne loyer a "+txt_nom.getText()+" "+txt_prenom.getText()+""
+                +"\nPour une durée allant de :"+txt_dateD.getText()+" jusqu'a "+txt_dateF.getText()+""
+                +"\nUn Logement située a :"+txt_adr.getText()+""
+               + "\nTel que le tout se poursuit et comporte sans exeption ni réserve et sans "
+                +"  plus ample description, le Client s'engage à payer un loyer de : "+txt_tarif.getText()+"DT"
+                 + "\nUn état des lieux sera établi avant la prise de possession du bien et à la fin de la location. Tout dommage constaté sera à la charge du Locataire.\n\n"
+                +"\n"
+                +"\n"
+                +"\n"
+                +"\n"
+                +"\n"
+                 +"\n"
+                 +"\n"
+                +"\nFait a Tunis le :"+ formater.format(date)+""
+                +"\nSignature :..............."
+                , FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, Font.NORMAL, BaseColor.BLACK)));
+        doc.close();
+        
+        // Open the PDF file with the default PDF viewer
+        File pdfFile = new File("contrat.pdf");
+        if (pdfFile.exists()) {
+            Desktop.getDesktop().open(pdfFile);
+        }
+    } catch (DocumentException | IOException ex) {
+        Logger.getLogger(MyLocationController.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
+    }
+

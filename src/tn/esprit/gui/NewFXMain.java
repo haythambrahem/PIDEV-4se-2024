@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pidev;
+package tn.esprit.gui;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,20 +18,28 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author FADI
+ * @author fadi saidi
  */
-public class PIdev extends Application {
+public class NewFXMain extends Application {
     
     @Override
-   
-       public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(ClassLoaderFXML.class.getResource("/tn/esprit/gui/Accueil.fxml"));
+    public void start(Stage primaryStage) {
+          Parent root;
+        try {
+            root = FXMLLoader.load(getClass().
+                    getResource("Accueil.fxml"));
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Ajouter Personne");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
 
-        Scene scene = new Scene(root);
+    }
 
-        stage.setScene(scene);
-        stage.show();
-       }
+    
+
     /**
      * @param args the command line arguments
      */
