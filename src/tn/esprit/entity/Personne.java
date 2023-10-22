@@ -189,9 +189,16 @@ public Personne(String nom, String prenom, String email, String password) {
                 + email + ", roles=" + roles + ", password=" + password + ", dateNaise=" 
                 + dateNaise + ", adresse=" + adresse + '}';
     }
+  
     
-    
-    
+     
+    public String toString1() {
+        return "Informations personnelles :"
+        
+        + "\nNom : " + nom
+        + "\nPrénom : " + prenom
+        + "\nEmail : " + email ;
+    }
     
     
     

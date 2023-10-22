@@ -49,8 +49,10 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import tn.esprit.entity.Locataire;
+import tn.esprit.entity.Location;
 import tn.esprit.entity.Logement;
 import tn.esprit.entity.type;
+import tn.esprit.services.ServiceLocation;
 import tn.esprit.services.ServiceLogement;
 
 /**
@@ -372,8 +374,21 @@ File image = new File(lab_url.getText());
                 
                 
     }
-
     }
+@FXML
+    private void searchLogementD(KeyEvent event) {
+       String searchCriteria = txt_searchid.getText(); // Get the search criteria from your text field
+    ServiceLogement serviceLogement = new ServiceLogement();
+    // Call your search function with the search criteria
+    List<Logement> searchResults = serviceLogement.rechercheLogement(searchCriteria);
+
+    // Update your ListView or any other UI element with the search results
+    ObservableList<Logement> searchResultsList = FXCollections.observableArrayList(searchResults);
+    listView_logement.setItems(searchResultsList);
+    }
+
+
+    
 
     @FXML
     private void searchLogement(ActionEvent event) {
@@ -458,28 +473,6 @@ File image = new File(lab_url.getText());
     }
  private ObservableList<Logement> LogementList;
  
-   @FXML
-    private void searchLogementD(KeyEvent event) {
-    if (LogementList != null) {
-        FilteredList<Logement> filteredData = new FilteredList<>(LogementList, logement -> true);
-
-        txt_searchid.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(logement -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                String searchKey = newValue.toLowerCase();
-
-                // Modify this condition to match the attribute you want to filter by
-                return logement.getAdr().toLowerCase().contains(searchKey);
-            });
-        });
-
-        // Apply sorting to the filtered data
-        listView_logement.setItems(FXCollections.observableArrayList(filteredData));
-    }
-}
-
+   
 }
 

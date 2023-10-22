@@ -30,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import tn.esprit.entity.LogementDetails;
+import tn.esprit.entity.SharedDataModel;
 import tn.esprit.services.ServiceLogement;
 import tn.esprit.services.ServiceShowLog;
 //import projet.ConnexionMysql;
@@ -63,6 +64,8 @@ public class AccueilController implements Initializable {
     private Button LIKE_btn;
 
    private ServiceShowLog serviceShowLog;
+    @FXML
+    private Label adr;
    
    
    
@@ -92,52 +95,7 @@ public class AccueilController implements Initializable {
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
-    /*    String adr = txt_adr.getText();
-          String sql3="select idLogement from logement where adrL ='"+adr+"'"; 
-        int position=0;
-          try {
-            st=cnx.prepareStatement(sql3);
-            result=st.executeQuery();
-            if(result.next()){
-                position=result.getInt("idLogement");
-                
-                
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-       // System.out.println(position);
-        
-        String sql4="select loyer, superfice, region,adrL,image from logement where  idLogement not in (select logement from location)and idLogement >'"+position+"'";
-        int loyer=0;
-      int superfice;
-      
-      byte byteImg[];
-      
-              Blob blob;
-        try {
-            st= cnx.prepareStatement(sql4);
-            result=st.executeQuery();
-             if(result.next()) {
-                 
-                loyer=result.getInt("loyer");
-                txt_loyer.setText(Integer.toString(loyer));
-                superfice=result.getInt("superfice");
-                txt_superfice.setText(Integer.toString(superfice));
-                txt_region.setText(result.getString("region"));
-                txt_adr.setText(result.getString("adrL"));
-                blob=result.getBlob("image");
-                byteImg=blob.getBytes(1,(int) blob.length());
-              //  Image img= new Image(new ByteArryInputStream(byte Img),imageLog.getFitWidth(),imageLog.getFitHeight(),true,true);
-                ByteArrayInputStream inputStream = new ByteArrayInputStream(byteImg);
-        Image img = new Image(inputStream);
-        imageLog.setImage(img); 
-            }
-            
-            
-        } catch (SQLException ex) {
-             ex.printStackTrace();
-        }*/
+   
     
     }
     public AccueilController() {
@@ -166,13 +124,8 @@ public void showLogement(){
        
         
              ShowSuivant();
-             
-       
-           
-        
-        
-        
-       
+      
+       String labelValue = adr.getText(); 
     }
 
     @FXML
@@ -201,10 +154,10 @@ public void showLogement(){
     }     
 
     public void updateUI(int loyer, String region, String adrL, String Img) {
-// Assuming you have JavaFX components in your controller class
-    txt_loyer.setText(Integer.toString(loyer)); // Update a text field for rent
-    txt_region.setText(region); // Update a text field for region
-    txt_adr.setText(adrL); // Update a text field for address
+
+    txt_loyer.setText(Integer.toString(loyer)); 
+    txt_region.setText(region);
+    txt_adr.setText(adrL); 
 
     // Convert the byte array to an Image and set it to an ImageView
   
@@ -225,5 +178,7 @@ imageLog.setImage(image);
 Image image = new Image(fileUrl);
 imageLog.setImage(image);
 
-    }    
+    }   
+
+    
 }

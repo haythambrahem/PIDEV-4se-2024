@@ -55,7 +55,7 @@
          <graphic>
             <FontAwesomeIcon glyphName="CHEVRON_LEFT" />
          </graphic></Button>
-      <JFXListView fx:id="listView_logement" layoutX="35.0" layoutY="266.0" onMouseClicked="#listLogEvn" prefHeight="340.0" prefWidth="787.0" />
+      <JFXListView fx:id="listView_logement" layoutX="35.0" layoutY="266.0" onMouseClicked="#listLogEvn" prefHeight="340.0" prefWidth="787.0" stylesheets="@../tools/Application.css" />
       <Button fx:id="refreshButton" layoutX="242.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleRefreshButton" prefHeight="25.0" prefWidth="17.0" text="ref" />
    </children>
 </AnchorPane>

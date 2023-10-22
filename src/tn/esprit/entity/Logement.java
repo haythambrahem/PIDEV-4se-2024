@@ -141,11 +141,11 @@ import java.util.Objects;
     
 @Override
 public String toString() {
-    return " l'adresse est " + adr + 
-           ", avec une superfice de " + superfice +
-           ", son loyer est " + loyer +
-           ", de type " + type + 
-           ", dans region " + region ;
+    return "Adresse : " + adr +", Région : " + region+ 
+           ", Superficie : " + superfice + " m²" +
+           "\n Loyer : " + loyer + " TND/Jour" +
+           ", Type : " + type  
+           ;
 }
 // public byte[] getImageData() {
 //        if (image == null) {

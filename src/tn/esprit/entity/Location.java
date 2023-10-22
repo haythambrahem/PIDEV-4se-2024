@@ -109,7 +109,13 @@ public Location(int id, String adr,String region, String email, String nom, Stri
 }
     @Override
     public String toString() {
-        return "Location{"  + ", logement=" + logement + ", personne=" + personne + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", tarif=" + tarif + '}';
+        return"Location Information {" +
+           "\n  Logement ID: " + logement +
+           "\n  Personne ID: " + personne +
+           "\n  Start Date: " + dateDebut +
+           "\n  End Date: " + dateFin +
+           "\n  Tarif: " + tarif +
+           "\n}";
     }
 
    

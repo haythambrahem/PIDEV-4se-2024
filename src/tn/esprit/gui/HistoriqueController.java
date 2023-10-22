@@ -82,6 +82,8 @@ Connection con;
     private JFXTextField txt_prenom;
     @FXML
     private Button move;
+    @FXML
+    private Label hello;
     /**
      * Initializes the controller class.
      */
@@ -92,6 +94,7 @@ Connection con;
          List<Location> locations = serviceLocation.getAllLocations();
          ObservableList<Location> locationList = FXCollections.observableArrayList(locations);
          listview_historique.setItems(locationList);
+         
     }    
     public ObservableList<Location> data = FXCollections.observableArrayList();
 
@@ -201,11 +204,13 @@ txt_dateFin.setText(formattedDateF);
     @FXML
     private void move(ActionEvent event) {
          try {
-           
+     /**/      String email= txt_email.getText();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MyLocation.fxml"));
-            Parent root = loader.load();
-
-            Scene newScene = new Scene(root);
+             
+             Parent root = loader.load();
+      /**/       MyLocationController myLocationController = loader.getController();
+       /**/    myLocationController.displayEmail(email);
+       /**/     Scene newScene = new Scene(root);
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

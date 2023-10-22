@@ -50,6 +50,7 @@ import tn.esprit.services.ServiceLocation;
 import tn.esprit.services.ServiceLogement;
 import tn.esprit.tools.MyDB;
 import javafx.util.converter.IntegerStringConverter;
+import tn.esprit.entity.Example;
 /**
  * FXML Controller class
  *
@@ -133,56 +134,7 @@ private ServicePersonne servicePersonne;
 
 
 
-//     String cin = txt_CIN.getText();
-//    String adr = txt_adr.getText();
-//
-//    Locataire locataire = serviceLocataire.rechercherLocataireParCIN(cin);
-//    List<Logement> logements = serviceLogement.rechercheLogement(adr);
-//    Logement logement = null;
-//
-//    if (logements.size() > 0) {
-//        logement = logements.get(0);
-//    }
-//
-//    if (locataire != null && logement != null) {
-//        LocalDate dateDebutValue = dateDebut.getValue();
-//        LocalDate dateFinValue = dateFin.getValue();
-//
-//        if (dateDebutValue != null && dateFinValue != null) {
-//            java.sql.Date dateDebut = java.sql.Date.valueOf(dateDebutValue);
-//            java.sql.Date dateFin = java.sql.Date.valueOf(dateFinValue);
-//
-//            ServiceLocation serviceLocation = new ServiceLocation();
-//
-//            if (!serviceLocation.isLocationAvailable(logement.getId(), dateDebut, dateFin)) {
-//                // Show an alert that location is not available
-//            } else {
-//                Location location = new Location();
-//                location.setLogement(logement);
-//                location.setLocataire(locataire);
-//                location.setDateDebut(dateDebut);
-//                location.setDateFin(dateFin);
-//
-//                if (serviceLocation.ajouterLocation(location)) {
-//                    Alert alert = new Alert(AlertType.INFORMATION);
-//                    alert.setTitle("Succès");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Location ajoutée avec succès.");
-//                    alert.showAndWait();
-//                } else {
-//                    Alert alert = new Alert(AlertType.ERROR);
-//                    alert.setTitle("Erreur");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Impossible d'ajouter la location.");
-//                    alert.showAndWait();
-//                }
-//            }
-//        } else {
-//            // Handle the case where the DatePicker values are null
-//        }
-//    } else {
-//        // Handle the case where locataire or logement is not found
-//    }
+//     
   @FXML
     private void addLocation(MouseEvent event) throws SQLException {
     String email = txt_CIN.getText();
@@ -226,7 +178,11 @@ private ServicePersonne servicePersonne;
                     alert.setContentText("Location ajoutée avec succès.");
                     alert.showAndWait();
                    clearInputFields();
-               //   dateDebut.setValue(null);
+      //Twilo API              //Twilo API
+        /**/      String recipientPhoneNumber = "+21650227451"; // Replace with the recipient's phone number
+        /**/  String messageText = "Votre Location est ajoutée avec succès"; // Provide your message
+        /**/ Example.sendTwilioSMS(recipientPhoneNumber, messageText);
+         //Twilo API       //   dateDebut.setValue(null);
                //     dateFin.setValue(null);
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
@@ -250,6 +206,7 @@ private ServicePersonne servicePersonne;
         alert.setContentText("Client ou logement non trouvé.");
         alert.showAndWait();
     }
+    
 }
 
 private Logement searchLogement(String adr) {
@@ -326,6 +283,7 @@ if (startDate != null && endDate != null) {
      serviceLogement = new ServiceLogement();
      servicePersonne = new ServicePersonne();
     // serviceLocation = new ServiceLocation();
+    
     } 
 
     
@@ -435,6 +393,7 @@ if (startDate != null && endDate != null) {
         Alert alert = new Alert(AlertType.ERROR, "Aucun locataire avec email=" + email, ButtonType.OK);
         alert.showAndWait();
     }
+    
 }
     TextField textField = new TextField();
 

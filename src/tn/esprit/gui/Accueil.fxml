@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
@@ -45,18 +46,8 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="precedant" layoutX="103.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#ShowPrecedant" prefHeight="40.0" prefWidth="39.0">
-         <graphic>
-            <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_LEFT" size="17" />
-         </graphic>
-      </Button>
-      <Button fx:id="suivant" layoutX="294.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#ShowSuivant" prefHeight="40.0" prefWidth="39.0">
-         <graphic>
-            <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_RIGHT" size="17" />
-         </graphic>
-      </Button>
       <JFXTextField fx:id="txt_adr" layoutX="466.0" layoutY="181.0" prefHeight="25.0" prefWidth="239.0" unFocusColor="#4688c9" />
-      <Label layoutX="474.0" layoutY="137.0" text="Adresse" textFill="#4688c9">
+      <Label fx:id="adr" layoutX="474.0" layoutY="137.0" text="Adresse" textFill="#4688c9">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -73,5 +64,15 @@
          <font>
             <Font size="19.0" />
          </font></Button>
+      <JFXButton fx:id="suivant" layoutX="247.0" layoutY="442.0" onMouseClicked="#ShowSuivant" prefHeight="40.0" prefWidth="47.0">
+         <graphic>
+            <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_RIGHT" size="17" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="precedant" layoutX="127.0" layoutY="442.0" onMouseClicked="#ShowPrecedant" prefHeight="40.0" prefWidth="47.0">
+         <graphic>
+            <FontAwesomeIcon fill="#4688c9" glyphName="CHEVRON_LEFT" size="17" />
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

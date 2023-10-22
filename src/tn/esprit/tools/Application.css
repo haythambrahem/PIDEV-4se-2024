@@ -80,3 +80,28 @@ and open the template in the editor.
 	-fx-background-radius: 5px;
 	-fx-text-fill: #FFFFFF;
 }
+.list-view {
+    -fx-background-color: #F0F0F0; /* Set the background color */
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+
+.list-cell:hover {
+    -fx-background-color: #D4D4D4; /* Hover background color */
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #0073e6; /* Selected background color */
+    -fx-text-fill: white; /* Selected text color */
+}
+
+.list-cell .label {
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 5 10 5 10; /* Padding for list cell */
+}
+
+.list-cell .label:hover {
+    -fx-text-fill: #0073e6; /* Hover text color */
+}

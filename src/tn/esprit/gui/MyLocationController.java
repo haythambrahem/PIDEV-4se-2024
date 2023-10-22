@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,6 +46,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tn.esprit.entity.Location;
+import tn.esprit.entity.SharedDataModel;
 import tn.esprit.services.ServiceLocation;
 
 /**
@@ -80,6 +82,8 @@ public class MyLocationController implements Initializable {
     private Button move;
     @FXML
     private Label yourEmail;
+    @FXML
+    private Label labelValue;
     /**
      * Initializes the controller class.
      */
@@ -87,25 +91,37 @@ public class MyLocationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
           ServiceLocation serviceLocation = new ServiceLocation();
        // List<Location> searchResults = serviceLocation.searchLocationsByEmail(critere);
-//         List<Location> locations = serviceLocation.getAllLocations();
-//         ObservableList<Location> locationList = FXCollections.observableArrayList(locations);
-//         MesLocation.setItems(locationList);
+         List<Location> locations = serviceLocation.getAllLocations();
+         ObservableList<Location> locationList = FXCollections.observableArrayList(locations);
+         MesLocation.setItems(locationList);
  String userEmail = yourEmail.getText().trim();
 
         // Fetch and display the data
         populateListView(userEmail);
-    }  
-     private void populateListView(String email) {
-        ServiceLocation serviceLocation = new ServiceLocation();
-
-        // Fetch data based on the extracted email
-        List<Location> initialData = serviceLocation.searchLocationsByEmail(email);
-
-        // Check if data is available
-        if (!initialData.isEmpty()) {
-            MesLocation.getItems().setAll(initialData);
-        }
+         
+    }  //display email
+     public void displayEmail(String email){
+        yourEmail.setText(email);
     }
+     private void populateListView(String email) {
+      ServiceLocation serviceLocation = new ServiceLocation();
+
+    // Fetch all locations
+    List<Location> allLocations = serviceLocation.getAllLocations();
+
+    // Filter locations based on the provided email
+    List<Location> filteredLocations = allLocations.stream()
+            .filter(location -> location.getPersonne().getEmail().equals(email))
+            .collect(Collectors.toList());
+
+    // Check if data is available
+    if (!filteredLocations.isEmpty()) {
+        MesLocation.getItems().setAll(filteredLocations);
+    } else {
+        // Clear the ListView if no matching locations are found
+        MesLocation.getItems().clear();
+    }
+}
 
     @FXML
     private void listMesLocation(MouseEvent event) {
@@ -224,5 +240,6 @@ public class MyLocationController implements Initializable {
         Logger.getLogger(MyLocationController.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
+   
     }
 
