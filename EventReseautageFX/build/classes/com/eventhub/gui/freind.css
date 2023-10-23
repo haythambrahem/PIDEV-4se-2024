@@ -1,0 +1,63 @@
+/* Custom styles for the Friend interface */
+.root {
+    -fx-background-color: #f0f2f5;
+}
+
+/* Styles for the top section */
+.top {
+    -fx-padding: 10px;
+}
+
+/* Styles for the search field */
+#searchField {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Styles for the search button */
+#searchButton {
+    -fx-background-color: #3b5998;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: bold;
+}
+
+/* Styles for the center section */
+.center {
+    -fx-padding: 10px;
+}
+
+/* Styles for the friend lists */
+.listView {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Styles for the friend list labels */
+.label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Styles for the friend list cells */
+.list-cell {
+    -fx-padding: 5px;
+}
+
+/* Styles for the bottom section */
+.bottom {
+    -fx-padding: 10px;
+}
+
+/* Styles for the buttons */
+.button {
+    -fx-background-color: #3b5998;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: bold;
+}
