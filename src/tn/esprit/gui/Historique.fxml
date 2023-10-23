@@ -9,57 +9,57 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="769.0" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.HistoriqueController">
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="769.0" style="-fx-background-color: #04577C;" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.HistoriqueController">
  <children>
-      <Label layoutX="14.0" layoutY="22.0" text="Logement">
+      <Label layoutX="14.0" layoutY="22.0" text="Logement" textFill="#1fffce">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_search" layoutX="112.0" layoutY="19.0" onKeyPressed="#OnKeyPressedSearch" onKeyTyped="#OnKeyTypedSearch" promptText="identifient" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_adr" layoutX="95.0" layoutY="65.0" prefHeight="25.0" prefWidth="224.0" unFocusColor="#4688c9" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="450.0" />
-      <JFXTextField fx:id="txt_prenom" layoutX="104.0" layoutY="207.0" prefHeight="25.0" prefWidth="224.0" unFocusColor="#4688c9" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="441.0" />
-      <JFXTextField fx:id="txt_region" layoutX="95.0" layoutY="104.0" prefHeight="25.0" prefWidth="224.0" unFocusColor="#4688c9" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="450.0" />
-      <Label layoutX="14.0" layoutY="65.0" prefHeight="25.0" prefWidth="55.0" text="Adresse" textFill="#4688c9" AnchorPane.leftAnchor="14.0">
+      <JFXTextField fx:id="txt_search" layoutX="112.0" layoutY="19.0" onKeyPressed="#OnKeyPressedSearch" onKeyTyped="#OnKeyTypedSearch" prefHeight="25.0" prefWidth="159.0" promptText="identifient" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_adr" layoutX="95.0" layoutY="65.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="450.0" />
+      <JFXTextField fx:id="txt_prenom" layoutX="95.0" layoutY="208.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="450.0" />
+      <JFXTextField fx:id="txt_region" layoutX="95.0" layoutY="110.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="450.0" />
+      <Label layoutX="14.0" layoutY="65.0" prefHeight="25.0" prefWidth="55.0" text="Adresse" textFill="#84fcff" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="19.0" layoutY="392.0" prefHeight="25.0" prefWidth="55.0" text="tarif" textFill="#4688c9" AnchorPane.leftAnchor="19.0">
+      <Label layoutX="14.0" layoutY="414.0" prefHeight="25.0" prefWidth="55.0" text="tarif" textFill="#84fcff" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="220.0" prefHeight="25.0" prefWidth="55.0" text="Prenom" textFill="#4688c9" AnchorPane.leftAnchor="14.0">
+      <Label layoutX="14.0" layoutY="208.0" prefHeight="25.0" prefWidth="55.0" text="Prenom" textFill="#84fcff" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="19.0" layoutY="104.0" prefHeight="25.0" prefWidth="55.0" text="Region" textFill="#4688c9" AnchorPane.leftAnchor="19.0">
+      <Label layoutX="14.0" layoutY="110.0" prefHeight="25.0" prefWidth="55.0" text="Region" textFill="#84fcff" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_nom" layoutX="98.0" layoutY="161.0" prefHeight="25.0" prefWidth="216.0" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_email" layoutX="114.0" layoutY="255.0" prefHeight="25.0" prefWidth="192.0" unFocusColor="#4688c9" />
-      <Label layoutX="17.0" layoutY="161.0" prefHeight="25.0" prefWidth="64.0" text="Nom " textFill="#4688c9" AnchorPane.leftAnchor="17.0">
+      <JFXTextField fx:id="txt_nom" layoutX="99.0" layoutY="161.0" prefHeight="25.0" prefWidth="216.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_email" layoutX="98.0" layoutY="255.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
+      <Label layoutX="17.0" layoutY="161.0" prefHeight="25.0" prefWidth="64.0" text="Nom " textFill="#84fcff" AnchorPane.leftAnchor="17.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="255.0" prefHeight="25.0" prefWidth="55.0" text="Email" textFill="#4688c9" AnchorPane.leftAnchor="14.0">
+      <Label layoutX="14.0" layoutY="255.0" prefHeight="25.0" prefWidth="55.0" text="Email" textFill="#84fcff" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_dateDebut" layoutX="114.0" layoutY="305.0" prefHeight="25.0" prefWidth="192.0" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_dateFin" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="192.0" unFocusColor="#4688c9" />
-      <Label layoutX="10.0" layoutY="320.0" prefHeight="25.0" prefWidth="72.0" text="dateDebut" textFill="#4688c9" AnchorPane.leftAnchor="4.0">
+      <JFXTextField fx:id="txt_dateDebut" layoutX="91.0" layoutY="308.0" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_dateFin" layoutX="91.0" layoutY="355.0" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
+      <Label layoutX="6.0" layoutY="308.0" prefHeight="25.0" prefWidth="72.0" text="DateDebut" textFill="#84fcff" AnchorPane.leftAnchor="6.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="355.0" prefHeight="25.0" prefWidth="55.0" text="DateFin" textFill="#4688c9" AnchorPane.leftAnchor="4.0">
+      <Label layoutX="14.0" layoutY="355.0" prefHeight="25.0" prefWidth="55.0" text="DateFin" textFill="#84fcff" AnchorPane.leftAnchor="14.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -70,12 +70,7 @@
          </graphic>
       </JFXButton>
       <JFXListView fx:id="listview_historique" layoutX="329.0" layoutY="47.0" onMouseClicked="#listLocation" prefHeight="371.0" prefWidth="426.0" />
-      <JFXTextField fx:id="txt_tarif" layoutX="118.0" layoutY="392.0" prefHeight="25.0" prefWidth="178.0" unFocusColor="#4688c9" />
-      <Label fx:id="hello" layoutX="143.0" layoutY="469.0" prefHeight="25.0" prefWidth="135.0" text="siwar.djebbi@esprit.com" textFill="#4688c9">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
+      <JFXTextField fx:id="txt_tarif" layoutX="84.0" layoutY="414.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
       <Button fx:id="move" layoutX="682.0" layoutY="520.0" mnemonicParsing="false" onAction="#move" text="Button" />
    </children>
 </AnchorPane>

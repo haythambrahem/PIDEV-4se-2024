@@ -125,7 +125,11 @@ public class ServicePersonne implements IService<Personne> {
             System.out.println(ex.getMessage());
         }
         return personne;    }
-
+////////////////////////////////////////////////////////////////////////////////////////
+    
+                                    /*Fadi */
+    
+    ////////////////////////////////////////////////////////////////////////////////////
     public Personne getPersonneById(int id) throws SQLException {
     String selectQuery = "SELECT * FROM personne WHERE id = ?";
     Personne personne = null;

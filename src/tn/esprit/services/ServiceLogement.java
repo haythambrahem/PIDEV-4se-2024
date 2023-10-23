@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -102,14 +103,15 @@ public List<Logement> rechercheLogement(String critere) {
         return Collections.emptyList();
     }
 }
-public List<Logement> rechercheLogement2(String adrCritere, String regionCritere) {
-    String selectQuery = "SELECT * FROM logement WHERE adrL LIKE ? AND region LIKE ?";
+public List<Logement> rechercheLogement2( String criteria) {
+    String sql = "SELECT * FROM logement WHERE adrL LIKE ? OR region LIKE ? OR superfice = ? OR loyer = ? ";
 
-    try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
-        preparedStatement.setString(1, "%" + adrCritere + "%"); // Utilize % for partial search
-        preparedStatement.setString(2, "%" + regionCritere + "%"); // Utilize % for partial search
-
-        ResultSet resultSet = preparedStatement.executeQuery();
+    try (PreparedStatement searchStatement = con.prepareStatement(sql)) {
+        searchStatement.setString(1, "%" + criteria + "%"); // Utilize % for partial search
+        searchStatement.setString(2, "%" + criteria + "%"); // Utilize % for partial search
+         searchStatement.setString(3, criteria);
+        searchStatement.setString(4, criteria);
+        ResultSet resultSet = searchStatement.executeQuery();
         List<Logement> logements = new ArrayList<>();
 
         while (resultSet.next()) {

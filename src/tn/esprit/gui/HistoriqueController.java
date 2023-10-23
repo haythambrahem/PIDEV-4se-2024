@@ -82,8 +82,6 @@ Connection con;
     private JFXTextField txt_prenom;
     @FXML
     private Button move;
-    @FXML
-    private Label hello;
     /**
      * Initializes the controller class.
      */
@@ -91,7 +89,7 @@ Connection con;
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ServiceLocation serviceLocation = new ServiceLocation();
-         List<Location> locations = serviceLocation.getAllLocations();
+        List<Location> locations = serviceLocation.getAllLocations();
          ObservableList<Location> locationList = FXCollections.observableArrayList(locations);
          listview_historique.setItems(locationList);
          

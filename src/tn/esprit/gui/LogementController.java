@@ -96,8 +96,6 @@ private ComboBox<String> cbLogementType;
     private JFXListView<Logement> listView_logement;
     @FXML
     private Button LogAccueil;
-    @FXML
-    private Button refreshButton;
     public ObservableList<Logement> data = FXCollections.observableArrayList();
 
  
@@ -380,7 +378,7 @@ File image = new File(lab_url.getText());
        String searchCriteria = txt_searchid.getText(); // Get the search criteria from your text field
     ServiceLogement serviceLogement = new ServiceLogement();
     // Call your search function with the search criteria
-    List<Logement> searchResults = serviceLogement.rechercheLogement(searchCriteria);
+    List<Logement> searchResults = serviceLogement.rechercheLogement2(searchCriteria);
 
     // Update your ListView or any other UI element with the search results
     ObservableList<Logement> searchResultsList = FXCollections.observableArrayList(searchResults);
@@ -464,7 +462,6 @@ File image = new File(lab_url.getText());
     }
 //  
 
-    @FXML
     private void handleRefreshButton(ActionEvent event) {
           ServiceLogement serviceLogement = new ServiceLogement();
     List<Logement> logements = serviceLogement.affihcerLogement();

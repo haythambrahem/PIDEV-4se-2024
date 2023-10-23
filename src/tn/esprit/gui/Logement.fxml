@@ -12,19 +12,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="662.0" prefWidth="857.0" styleClass="backgrnd" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.LogementController">
+<AnchorPane id="AnchorPane" prefHeight="662.0" prefWidth="857.0" style="-fx-background-color: #04577C;" styleClass="backgrnd" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.LogementController">
    <children>
-      <Label layoutX="55.0" layoutY="40.0" text="Rechercher">
+      <Label layoutX="59.0" layoutY="44.0" text="Rechercher" textFill="#1fffce">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_searchid" layoutX="174.0" layoutY="41.0" onKeyTyped="#searchLogementD" prefHeight="25.0" prefWidth="146.0" promptText="Adresse" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_adr" layoutX="24.0" layoutY="102.0" prefHeight="25.0" prefWidth="243.0" promptText="Adresse" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_superfice" layoutX="290.0" layoutY="150.0" promptText="Superfice" unFocusColor="#4688c9" />
-      <JFXComboBox fx:id="cb_type" layoutX="29.0" layoutY="150.0" prefHeight="31.0" prefWidth="232.0" promptText="type" unFocusColor="#4688c9" />
-      <JFXTextField fx:id="txt_loyer" layoutX="174.0" layoutY="214.0" prefHeight="31.0" prefWidth="146.0" promptText="loyer" unFocusColor="#4688c9" />
-      <Label fx:id="lab_url" layoutX="572.0" layoutY="232.0" prefHeight="26.0" prefWidth="219.0" text="Aucune sélectionée" textFill="#4688c9">
+      <JFXTextField fx:id="txt_searchid" layoutX="174.0" layoutY="41.0" onKeyTyped="#searchLogementD" prefHeight="26.0" prefWidth="183.0" promptText="Adresse" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_adr" labelFloat="true" layoutX="24.0" layoutY="102.0" prefHeight="25.0" prefWidth="243.0" promptText="Adresse" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_superfice" layoutX="290.0" layoutY="150.0" promptText="Superfice" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="cb_type" layoutX="29.0" layoutY="150.0" prefHeight="31.0" prefWidth="232.0" promptText="type" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_loyer" layoutX="174.0" layoutY="214.0" prefHeight="31.0" prefWidth="146.0" promptText="loyer" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <Label fx:id="lab_url" layoutX="572.0" layoutY="232.0" prefHeight="26.0" prefWidth="219.0" text="Aucune sélectionée" textFill="#1fffce">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -37,7 +37,7 @@
             <Font size="13.0" />
          </font>
          <graphic>
-            <FontAwesomeIcon glyphName="UPLOAD" size="2em" />
+            <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" size="2em" />
          </graphic>
       </JFXButton>
       <JFXButton layoutX="319.0" layoutY="41.0" onAction="#searchLogement" prefHeight="19.0" prefWidth="0.0">
@@ -45,17 +45,16 @@
             <FontAwesomeIcon glyphName="SEARCH" />
          </graphic>
       </JFXButton>
-      <Pane layoutX="472.0" layoutY="25.0" prefHeight="210.0" prefWidth="365.0">
+      <Pane layoutX="488.0" layoutY="25.0" prefHeight="188.0" prefWidth="349.0">
          <children>
-            <ImageView fx:id="image_logement" fitHeight="210.0" fitWidth="359.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image_logement" fitHeight="194.0" fitWidth="362.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <JFXTextField fx:id="txt_region" layoutX="290.0" layoutY="102.0" promptText="Region" unFocusColor="#4688c9" />
+      <JFXTextField fx:id="txt_region" layoutX="290.0" layoutY="102.0" promptText="Region" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
       <Button fx:id="LogAccueil" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#logementTOaccueil" text="nav">
          <graphic>
             <FontAwesomeIcon glyphName="CHEVRON_LEFT" />
          </graphic></Button>
       <JFXListView fx:id="listView_logement" layoutX="35.0" layoutY="266.0" onMouseClicked="#listLogEvn" prefHeight="340.0" prefWidth="787.0" stylesheets="@../tools/Application.css" />
-      <Button fx:id="refreshButton" layoutX="242.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleRefreshButton" prefHeight="25.0" prefWidth="17.0" text="ref" />
    </children>
 </AnchorPane>

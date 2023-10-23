@@ -82,8 +82,6 @@ public class MyLocationController implements Initializable {
     private Button move;
     @FXML
     private Label yourEmail;
-    @FXML
-    private Label labelValue;
     /**
      * Initializes the controller class.
      */
