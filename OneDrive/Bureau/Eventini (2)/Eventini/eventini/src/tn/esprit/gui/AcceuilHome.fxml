@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="743.0" prefWidth="1221.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="tn.esprit.gui.AcceuilHomeController">
+   <children>
+      <ImageView accessibleRole="BUTTON" fitHeight="743.0" fitWidth="1221.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/APhome.jpeg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="1.0" layoutY="28.0" prefHeight="390.0" prefWidth="904.0">
+         <children>
+            <TextField editable="false" promptText="Bienvenue dans l'univers d'Eventini " style="-fx-background-color: transparent;" styleClass="logout" stylesheets="@dashboardDesign.css">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </TextField>
+            <TextField promptText="- Votre Application Événementielle Ultime !" style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="Avez-vous déjà rêvé de créer, gérer ou participer à n'importe quel type d'événement, du plus petit " style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="rassemblement aux plus grandes célébrations, avec facilité et professionnalisme ? " style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="C'est précisément la promesse d'Eventini. Notre application événementielle révolutionnaire" style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="est conçue pour simplifier chaque étape du processus de gestion d'événements," style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="vous permettant de créer des expériences inoubliables en un clin d'œil." style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="Que vous soyez un organisateur d'événements chevronné ou que vous organisiez " style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="votre première réunion, Eventini est votre partenaire idéal. " style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="Eventini est bien plus qu'une simple application. C'est une communauté dynamique " style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="qui rassemble organisateurs d'événements et participants, " style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField promptText="permettant à chacun de vivre des expériences exceptionnelles." style="-fx-background-color: transparent;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
