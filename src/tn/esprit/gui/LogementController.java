@@ -469,6 +469,25 @@ File image = new File(lab_url.getText());
     listView_logement.setItems(logementList);
     }
  private ObservableList<Logement> LogementList;
+
+    @FXML
+    private void goToHistorique(ActionEvent event) {
+           try {
+           
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Historique.fxml"));
+            Parent root = loader.load();
+
+            Scene newScene = new Scene(root);
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            currentStage.setScene(newScene);
+
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
  
    
 }

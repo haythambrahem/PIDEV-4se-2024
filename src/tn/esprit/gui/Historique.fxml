@@ -69,8 +69,14 @@
             <FontAwesomeIcon glyphName="SEARCH" />
          </graphic>
       </JFXButton>
-      <JFXListView fx:id="listview_historique" layoutX="329.0" layoutY="47.0" onMouseClicked="#listLocation" prefHeight="371.0" prefWidth="426.0" />
+      <JFXListView fx:id="listview_historique" layoutX="329.0" layoutY="47.0" onMouseClicked="#listLocation" prefHeight="443.0" prefWidth="426.0" />
       <JFXTextField fx:id="txt_tarif" layoutX="84.0" layoutY="414.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: ffffff;" unFocusColor="WHITE" />
       <Button fx:id="move" layoutX="682.0" layoutY="520.0" mnemonicParsing="false" onAction="#move" text="Button" />
+      <Button layoutX="28.0" layoutY="514.0" mnemonicParsing="false" onAction="#goToLogement" text="Hebergement" />
+      <Label layoutX="319.0" layoutY="6.0" text="Historique" textFill="#1fffce">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

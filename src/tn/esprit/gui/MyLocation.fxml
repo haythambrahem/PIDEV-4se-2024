@@ -59,5 +59,11 @@
             <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" />
          </graphic>
       </JFXButton>
+      <Button layoutX="270.0" layoutY="425.0" mnemonicParsing="false" onAction="#goToAccueil" text="Accueil" />
+      <Label layoutX="254.0" layoutY="1.0" text="Mes Reservation" textFill="#1fffce">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

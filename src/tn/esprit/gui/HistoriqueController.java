@@ -219,6 +219,25 @@ txt_dateFin.setText(formattedDateF);
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void goToLogement(ActionEvent event) {
+           try {
+           
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Logement.fxml"));
+            Parent root = loader.load();
+
+            Scene newScene = new Scene(root);
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            currentStage.setScene(newScene);
+
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
       
     
     }

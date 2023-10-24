@@ -140,11 +140,14 @@ public class MyLocationController implements Initializable {
          txt_prenom.setText(selectedLocation.getPersonne().getPrenom());
     }
     }
-
+//////////////////////////////////////////////
+    
+    
+    //////////////////////////////////////////
     @FXML
     private void rechercherEmail(ActionEvent event) {
-      //  String critere = txt_email.getText().trim();
-         String critere = yourEmail.getText().trim();
+        String critere = txt_email.getText().trim();
+      //  String critere = yourEmail.getText().trim();
     if (critere.isEmpty()) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
@@ -238,6 +241,25 @@ public class MyLocationController implements Initializable {
         Logger.getLogger(MyLocationController.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
+
+    @FXML
+    private void goToAccueil(ActionEvent event) {
+           try {
+           
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueil.fxml"));
+            Parent root = loader.load();
+
+            Scene newScene = new Scene(root);
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            currentStage.setScene(newScene);
+
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
    
     }
 

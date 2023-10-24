@@ -19,7 +19,7 @@ public class Example {
     // Find your Account SID and Auth Token at twilio.com/console
     // and set the environment variables. See http://twil.io/secure
     public static final String ACCOUNT_SID = "AC9a1268e7aefa6ba923e27df703fe77c4";
-    public static final String AUTH_TOKEN = "2fc773b6619813f79cb0bf3b9c0ca47e";
+    public static final String AUTH_TOKEN = "75b6a3339b8a22b1d50148ae9ab57f32";
 
     public static void sendTwilioSMS(String recipientPhoneNumber, String messageText) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);

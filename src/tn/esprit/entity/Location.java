@@ -110,7 +110,7 @@ public Location(int id, String adr,String region, String email, String nom, Stri
     @Override
     public String toString() {
         return"Information" +
-           "\nLe Client est  " + personne.getNom() +" "+ personne.getPrenom()+" sont Email est "+personne.getEmail()+
+           "\nLe Client est  " + personne.getNom() +" "+ personne.getPrenom()+" son Email est "+personne.getEmail()+
                 "\nLe  Logement est " + logement.getAdr() + " La region de "+logement.getRegion()+
            
            "\n  Start Date: " + dateDebut +

@@ -180,5 +180,24 @@ imageLog.setImage(image);
 
     }   
 
+    @FXML
+    private void goToMyLocation(ActionEvent event) {
+           try {
+           
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MyLocation.fxml"));
+            Parent root = loader.load();
+
+            Scene newScene = new Scene(root);
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            currentStage.setScene(newScene);
+
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     
 }
