@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="695.0" prefWidth="932.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.FXMLController">
+    <stylesheets>
+        <URL value="@fxml.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane prefHeight="695.0" prefWidth="186.0" style="-fx-background-color: #2F2D28;">
+         <children>
+            <Pane prefHeight="57.0" prefWidth="186.0" style="-fx-background-color: BLACK;" stylesheets="@ajouteroffre.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="24.0" layoutY="15.0" text="Gestion Offre" textFill="#f8f4f4">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Button fx:id="buttonOffre" layoutX="18.0" layoutY="132.0" mnemonicParsing="false" onAction="#goOffre" prefHeight="43.0" prefWidth="151.0" style="-fx-background-color: transparente;" styleClass="add-btn" stylesheets="@ajouteroffre.css" text="Offre" textFill="#fffdfd">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
+            <Button fx:id="butonPanier" layoutX="18.0" layoutY="213.0" mnemonicParsing="false" onAction="#goPAnier" prefHeight="49.0" prefWidth="151.0" style="-fx-background-color: transparente;" styleClass="add-btn" stylesheets="@ajouteroffre.css" text="Panier" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
+            <Button fx:id="retourAccc" layoutX="14.0" layoutY="297.0" mnemonicParsing="false" onAction="#retourAcc2" prefHeight="49.0" prefWidth="151.0" style="-fx-background-color: transparente;" styleClass="add-btn" stylesheets="@ajouteroffre.css" text="retour" textFill="#fcf9f9">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="imageFixe" fitHeight="404.0" fitWidth="415.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="695.0" fitWidth="746.0" layoutX="186.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/evenement.PNG" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

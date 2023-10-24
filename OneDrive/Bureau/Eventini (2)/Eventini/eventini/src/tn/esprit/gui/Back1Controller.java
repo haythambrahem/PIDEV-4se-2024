@@ -33,6 +33,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -143,6 +144,8 @@ public class Back1Controller implements Initializable {
     private AnchorPane HomeAll;
     @FXML
     private AnchorPane rootBack;
+    @FXML
+    private Button goOffreBak;
 
     public Back1Controller() {
         this.cnx = MyDB.getinstance().getCon();
@@ -847,6 +850,16 @@ private Parent fxml;
     private void HebergementBack(ActionEvent event) {
          try {
             fxml= FXMLLoader.load(getClass().getResource("Logement.fxml"));
+            rootBack.getChildren().removeAll();
+             rootBack.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+        }
+    }
+
+    @FXML
+    private void goBakOffre(ActionEvent event) {
+         try {
+            fxml= FXMLLoader.load(getClass().getResource("OffreA.fxml"));
             rootBack.getChildren().removeAll();
              rootBack.getChildren().setAll(fxml);
         } catch (IOException ex) {

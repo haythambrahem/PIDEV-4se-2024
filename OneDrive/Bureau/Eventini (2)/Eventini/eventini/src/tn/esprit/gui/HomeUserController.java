@@ -117,7 +117,7 @@ public class HomeUserController implements Initializable {
     @FXML
     private void goToOffre(ActionEvent event) {
         try {
-            fxml= FXMLLoader.load(getClass().getResource(".fxml"));
+            fxml= FXMLLoader.load(getClass().getResource("Offre.fxml"));
             root.getChildren().removeAll();
             root.getChildren().setAll(fxml);
         } catch (IOException ex) {
