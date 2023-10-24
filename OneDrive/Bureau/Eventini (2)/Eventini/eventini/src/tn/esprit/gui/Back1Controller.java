@@ -146,6 +146,8 @@ public class Back1Controller implements Initializable {
     private AnchorPane rootBack;
     @FXML
     private Button goOffreBak;
+    @FXML
+    private Button goEventMain;
 
     public Back1Controller() {
         this.cnx = MyDB.getinstance().getCon();
@@ -865,5 +867,16 @@ private Parent fxml;
         } catch (IOException ex) {
         }
     }
-    
+
+    @FXML
+    private void eventFace(ActionEvent event) throws IOException {
+          
+         try {
+            fxml= FXMLLoader.load(getClass().getResource("AfficherEvent.fxml"));
+            rootBack.getChildren().removeAll();
+            rootBack.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+        }
+    }
 }
+   

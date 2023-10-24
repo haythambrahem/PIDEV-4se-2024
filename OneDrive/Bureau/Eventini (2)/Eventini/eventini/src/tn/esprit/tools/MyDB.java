@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Fayechi
+ * @author hayth
  */
 public class MyDB {
     
