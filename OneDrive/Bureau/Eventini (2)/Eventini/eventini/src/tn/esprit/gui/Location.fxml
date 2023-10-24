@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="518.0" prefWidth="808.0" style="-fx-background-color: #04577C;" stylesheets="@../tools/Application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.LocationController">
+     <children>
+      <Label layoutX="15.0" layoutY="51.0" text="Logement" textFill="#1fffce">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_searchLogementid" layoutX="116.0" layoutY="48.0" prefHeight="25.0" prefWidth="197.0" promptText="identifient" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_adr" layoutX="111.0" layoutY="97.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="389.0" />
+      <JFXButton layoutX="459.0" layoutY="463.0" onMouseClicked="#addLocation" prefHeight="35.0" prefWidth="133.0" styleClass="buttons" text="Ajouter">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></JFXButton>
+      <JFXTextField fx:id="txt_loyer" layoutX="111.0" layoutY="130.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="389.0" />
+      <JFXTextField fx:id="txt_type" layoutX="111.0" layoutY="164.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="389.0" />
+      <ImageView fx:id="imageLog" fitHeight="296.0" fitWidth="353.0" layoutX="433.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="txt_region" layoutX="111.0" layoutY="197.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="389.0" />
+      <Label layoutX="4.0" layoutY="97.0" prefHeight="25.0" prefWidth="55.0" text="Adresse" textFill="#84fcff" AnchorPane.leftAnchor="4.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="130.0" prefHeight="25.0" prefWidth="55.0" text="Loyer" textFill="#84fcff" AnchorPane.leftAnchor="4.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="164.0" prefHeight="25.0" prefWidth="55.0" text="Type" textFill="#84fcff" AnchorPane.leftAnchor="4.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="197.0" prefHeight="25.0" prefWidth="55.0" text="Region" textFill="#84fcff" AnchorPane.leftAnchor="4.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="246.0" text="Client" textFill="#1fffce">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_cinSearch" layoutX="149.0" layoutY="247.0" prefHeight="25.0" prefWidth="197.0" promptText="Email" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_nomPrenom" layoutX="113.0" layoutY="308.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_tele" layoutX="113.0" layoutY="353.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txt_CIN" layoutX="113.0" layoutY="401.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffffff;" unFocusColor="WHITE" />
+      <Label layoutX="5.0" layoutY="308.0" prefHeight="25.0" prefWidth="108.0" text="Prenom" textFill="#84fcff" AnchorPane.leftAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="353.0" prefHeight="25.0" prefWidth="72.0" text="Nom" textFill="#84fcff" AnchorPane.leftAnchor="19.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="401.0" prefHeight="26.0" prefWidth="87.0" text="Email" textFill="#84fcff" AnchorPane.leftAnchor="4.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXDatePicker fx:id="dateDebut" layoutX="418.0" layoutY="401.0" prefHeight="25.0" prefWidth="117.0" promptText="Date début" style="-fx-background-color: #ffffff;" />
+      <JFXDatePicker fx:id="dateFin" layoutX="541.0" layoutY="401.0" onAction="#periode" prefHeight="25.0" prefWidth="108.0" promptText="Date fin" style="-fx-background-color: #ffffff;" />
+      <JFXTextField fx:id="txt_periode" layoutX="663.0" layoutY="401.0" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #ffffff;" />
+      <Label layoutX="729.0" layoutY="396.0" prefHeight="35.0" prefWidth="46.0" text="Jour" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <JFXButton layoutX="266.0" layoutY="49.0" onAction="#searchLogement" prefHeight="17.0" prefWidth="0.0">
+         <graphic>
+            <FontAwesomeIcon glyphName="SEARCH" />
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="321.0" layoutY="247.0" onAction="#searchLocataire" prefHeight="17.0" prefWidth="15.0">
+         <graphic>
+            <FontAwesomeIcon glyphName="SEARCH" />
+         </graphic>
+      </JFXButton>
+      <Button layoutX="7.0" layoutY="483.0" mnemonicParsing="false" onAction="#goToAccueil" text="Accueil">
+         <graphic>
+            <FontAwesomeIcon glyphName="CHEVRON_LEFT" />
+         </graphic></Button>
+      <Button layoutX="680.0" layoutY="483.0" mnemonicParsing="false" onAction="#goToMyLocation" text="Mes Reservation">
+         <graphic>
+            <FontAwesomeIcon glyphName="CHEVRON_RIGHT" />
+         </graphic></Button>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="313.0" layoutY="1.0" prefHeight="26.0" prefWidth="179.0" text="Reservation" textFill="#1fffce">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

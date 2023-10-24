@@ -128,7 +128,64 @@ public class ServicePersonne implements IService<Personne> {
         }
         return personne;    }
 
-   
+     public Personne getPersonneById(int id) throws SQLException {
+    String selectQuery = "SELECT * FROM personne WHERE id = ?";
+    Personne personne = null;
+
+    try (PreparedStatement preparedStatement = con.prepareStatement(selectQuery)) {
+        preparedStatement.setInt(1, id);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            personne = new Personne();
+            personne.setId(resultSet.getInt("id"));
+            personne.setNom(resultSet.getString("nom"));
+            personne.setPrenom(resultSet.getString("prenom"));
+            personne.setEmail(resultSet.getString("email"));
+        //    personne.setTele(resultSet.getString("tele"));
+          //  personne.setDateNaise(resultSet.getDate("datenaissL"));
+          //  personne.setCin(resultSet.getString("CIN"));
+            // Vous pouvez continuer à définir d'autres propriétés du locataire ici
+        }
+    }
+
+    return personne;
+    }
+ public int retrievePersonneIdByEMAIL(String email) {
+    try {
+        String sql = "SELECT * FROM personne WHERE email = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setString(1, email);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            return resultSet.getInt("id");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0; // Return 0 if no matching locataire is found.
+}
+     public Personne rechercherPersonneParEmail(String email) {
+      String sql = "SELECT * FROM personne WHERE email = ?";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Personne personne = new Personne();
+                personne.setEmail(resultSet.getString("email"));
+                personne.setNom(resultSet.getString("nom"));
+                personne.setPrenom(resultSet.getString("prenom"));
+              //  locataire.setTele(resultSet.getString("teleL"));
+                return personne;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
    
 
     

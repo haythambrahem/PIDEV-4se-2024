@@ -29,6 +29,7 @@ import tn.esprit.services.Global;
  *
  * @author hayth
  */
+
 public class HomeUserController implements Initializable {
     private Parent fxml;
 
@@ -126,7 +127,7 @@ public class HomeUserController implements Initializable {
     @FXML
     private void goToHeberge(ActionEvent event) {
         try {
-            fxml= FXMLLoader.load(getClass().getResource(".fxml"));
+            fxml= FXMLLoader.load(getClass().getResource("Accueil.fxml"));
             root.getChildren().removeAll();
             root.getChildren().setAll(fxml);
         } catch (IOException ex) {

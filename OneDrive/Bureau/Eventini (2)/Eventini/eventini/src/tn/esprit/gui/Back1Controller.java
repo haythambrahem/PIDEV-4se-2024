@@ -139,6 +139,10 @@ public class Back1Controller implements Initializable {
 //    private TextField Adressetext;
 //    private TextField Teltext;
 //    private TableColumn<?, ?> Tel;
+    @FXML
+    private AnchorPane HomeAll;
+    @FXML
+    private AnchorPane rootBack;
 
     public Back1Controller() {
         this.cnx = MyDB.getinstance().getCon();
@@ -837,6 +841,16 @@ public class Back1Controller implements Initializable {
         Stage stage = (Stage) sessionlogout.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+private Parent fxml;
+    @FXML
+    private void HebergementBack(ActionEvent event) {
+         try {
+            fxml= FXMLLoader.load(getClass().getResource("Logement.fxml"));
+            rootBack.getChildren().removeAll();
+             rootBack.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+        }
     }
     
 }
