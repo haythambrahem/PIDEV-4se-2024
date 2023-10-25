@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="tn.esprit.gui.ModifPersonneController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutY="1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="329.0" layoutY="50.0" text="Nom" />
+            <Label layoutX="321.0" layoutY="119.0" text="Prenom" />
+            <TextField fx:id="txtnom" layoutX="392.0" layoutY="46.0" />
+            <TextField fx:id="txtprenom" layoutX="392.0" layoutY="115.0" />
+            <Button layoutX="439.0" layoutY="249.0" mnemonicParsing="false" onAction="#addPerson" text="Ajouter" />
+            <AnchorPane layoutY="-1.0" prefHeight="401.0" prefWidth="300.0" style="-fx-background-color: #255;">
+               <children>
+                  <Text fill="WHITE" layoutX="18.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Eventini" wrappingWidth="263.51171875">
+                     <font>
+                        <Font name="System Bold" size="54.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
